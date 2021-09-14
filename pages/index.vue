@@ -3,11 +3,10 @@
     <Header></Header>
     <div class="wrap_main">
       <div class="top_view" id="title1">
-        <div class="info">
-          <div class="top_title"><h1>雲林最大蔬果經銷商</h1></div>
-          <div class="top_message"><h2>蔬果批發｜蔬果進口</h2></div>
-          <div class="tabkeALook_btn">FB粉絲專頁</div>
-        </div>
+        <div class="top_title"><h1>健康 效率 永續經營</h1></div>
+        <div class="top_subtitle"><h2>healthy, efficient, sustainable development</h2></div>
+        <div class="top_message"><h2>蔬果批發｜蔬果進口</h2></div>
+        <a class="tabkeALook_btn" href="https://www.facebook.com/%E6%B5%A4%E8%B3%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-196766557402879/" target="_black">FB粉絲專頁</a>
       </div>
       <div class="first_view">
         <div class="cardList">

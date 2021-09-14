@@ -9,42 +9,52 @@
             background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
-            .info {
-                .top_title {
-                    font-size: 30px;
-                    font-weight: 700;
-                    padding-top: 200px;
-                    padding-left: 300px;
-                    text-shadow: 0.1em 0.1em 0.2em white;
-                    color: rgb(228, 6, 57);
-                    @media (max-width: 428px) {
-                        padding-top: 50px;
-                        padding-left: 18px;
-                    }
+            .top_title {
+                font-size: 30px;
+                font-weight: 700;
+                padding-top: 200px;
+                padding-left: 300px;
+                text-shadow: 0.1em 0.1em 0.2em white;
+                color: rgb(228, 6, 57);
+                @media (max-width: 428px) {
+                    padding-top: 50px;
+                    padding-left: 18px;
                 }
-                .top_message {
-                    width: 350px;
-                    padding-top: 20px;
-                    padding-left: 300px;
-                    text-shadow: 0.1em 0.1em 0.2em black;
-                    color: white;
-                    @media (max-width: 428px) {
-                        padding-left: 18px;
-                    }
+            }
+            .top_subtitle {
+                padding-left: 300px;
+                text-shadow: 0.1em 0.1em 0.2em black;
+                color: white;
+                @media (max-width: 428px) {
+                    padding-left: 18px;
                 }
-                .tabkeALook_btn {
-                    margin-top: 20px;
-                    margin-left: 300px;
-                    margin-bottom: 200px;
-                    background-color: rgb(228, 6, 57);
-                    color: white;
-                    width: 85px;
-                    font-size: 16px;
-                    font-weight: 500;
-                    padding: 9px;
-                    @media (max-width: 428px) {
-                        margin-bottom: 40px;
-                    }
+                > h2 {
+                    font-size: 26px;;
+                    font-weight: 400;
+                }
+            }
+            .top_message {
+                width: 350px;
+                padding-top: 100px;
+                padding-left: 300px;
+                text-shadow: 0.1em 0.1em 0.2em black;
+                color: white;
+                @media (max-width: 428px) {
+                    padding-left: 18px;
+                }
+            }
+            .tabkeALook_btn {
+                margin-top: 20px;
+                margin-left: 300px;
+                margin-bottom: 100px;
+                background-color: rgb(228, 6, 57);
+                color: white;
+                width: 85px;
+                font-size: 16px;
+                font-weight: 500;
+                padding: 9px;
+                @media (max-width: 428px) {
+                    margin-bottom: 40px;
                 }
             }
         }
@@ -64,7 +74,7 @@
                             width: 60px;
                             height: 60px;
                         }
-                    }}
+                    }
                 }
             }
         }
