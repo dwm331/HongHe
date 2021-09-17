@@ -2,6 +2,10 @@
   <div class="wrapper">
     <Header></Header>
     <div class="wrap_main">
+      <div class="top_bar">
+        <img src="~/static/img/logo.jpeg" alt="">
+        <h2>浤賀有限公司</h2>
+      </div>
       <div class="top_view" id="title1">
         <div class="top_title"><h1>健康 效率 永續經營</h1></div>
         <div class="top_subtitle"><h2>healthy, efficient, sustainable development</h2></div>
@@ -44,21 +48,19 @@
       </div>
       <div class="second_view" id="title2">
         <div>
-          <div>
-            <img src="~/static/img/main.jpeg" alt="" />
-          </div>
-          <div>
-            <div class="sencond_title">關於我們</div>
-            <div class="sencond_message">
-              <p>
-                成立於2018年，雲林縣最大蔬菜貿易公司，進口批售大白菜、白蘿蔔、高麗菜、青花菜、美生菜、南瓜等蔬果。主要販售的通路有果菜市場、餐廳食材等。
-              </p>
-              <p>地址：雲林縣虎尾鎮文科路1342號</p>
-            </div>
+          <img src="~/static/img/main.jpeg" alt="" />
+        </div>
+        <div>
+          <div class="sencond_title">關於我們</div>
+          <div class="sencond_message">
+            <p>
+              成立於2018年，雲林縣最大蔬菜貿易公司，進口批售大白菜、白蘿蔔、高麗菜、青花菜、美生菜、南瓜等蔬果。主要販售的通路有果菜市場、餐廳食材等。
+            </p>
+            <p>地址：雲林縣虎尾鎮文科路1342號</p>
           </div>
         </div>
       </div>
-      <div class="img_view">
+      <div class="img_view" id="title3">
         <div class="card" v-for="(item, index) in products" :key="index">
           <div class="card_message">
             <h3>{{ item.name }}</h3>
@@ -67,8 +69,8 @@
         </div>
       </div>
     </div>
-    <Footer id="title7"></Footer>
-    <!-- <div id="fb-root"></div> -->
+    <Footer id="title5"></Footer>
+    <div id="fb-root"></div>
   </div>
 </template>
 
