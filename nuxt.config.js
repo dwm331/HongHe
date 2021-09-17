@@ -19,7 +19,7 @@ export default {
       { name: 'Description', content: '浤賀有限公司 | HongHe 蔬菜貿易、蔬果批發、蔬果進口、農產品買賣，商品大白菜、白蘿蔔、高麗菜、青花菜、美生菜、南瓜，公司主旨健康、效率、永續經營' },
       { name: 'format-detection', content: 'telephone=no' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:image', content: 'https://github.com/dwm331/HongHe/blob/main/static/img/logo.jpeg' },
+      { property: 'og:image', content: 'https://raw.githubusercontent.com/dwm331/HongHe/main/static/img/logo.jpeg' },
       { property: 'og:title', content: '浤賀有限公司 | HongHe 蔬菜貿易、蔬果批發、蔬果進口、健康' },
       { property: 'og:description', content: '浤賀有限公司 | HongHe 蔬菜貿易、蔬果批發、蔬果進口、農產品買賣，商品大白菜、白蘿蔔、高麗菜、青花菜、美生菜、南瓜，公司主旨健康、效率、永續經營' },
       { property: 'og:url', content: 'https://dwm331.github.io/HongHe/' },
@@ -28,7 +28,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'apple-touch-icon', type: 'image/jpeg', href: 'https://github.com/dwm331/HongHe/blob/main/static/img/logo.jpeg' }
+      { rel: 'apple-touch-icon', type: 'image/jpeg', href: 'https://raw.githubusercontent.com/dwm331/HongHe/main/static/img/logo.jpeg' }
     ]
   },
 
