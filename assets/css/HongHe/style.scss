@@ -3,12 +3,27 @@
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
+        .top_bar {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            @media (max-width: 768px) {
+                display: flex;
+            }
+            > img {
+                margin-right: 20px;
+            }
+        }
         .top_view {
             background-size: cover;
             background-image: url(~/static/img/main_bg.jpg);
             background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
+            @media (max-width: 768px) {
+                align-items: center;
+                text-align: center;
+            }
             .top_title {
                 font-size: 30px;
                 font-weight: 700;
@@ -16,21 +31,26 @@
                 padding-left: 300px;
                 text-shadow: 0.1em 0.1em 0.2em white;
                 color: rgb(228, 6, 57);
-                @media (max-width: 428px) {
-                    padding-top: 50px;
-                    padding-left: 18px;
+                @media (max-width: 768px) {
+                    padding: 30px;
                 }
             }
             .top_subtitle {
                 padding-left: 300px;
                 text-shadow: 0.1em 0.1em 0.2em black;
                 color: white;
-                @media (max-width: 428px) {
-                    padding-left: 18px;
-                }
                 > h2 {
-                    font-size: 26px;;
+                    font-size: 26px;
                     font-weight: 400;
+                }
+                @media (max-width: 768px) {
+                    text-align: center;
+                    padding: 0;
+                    > h2 {
+                        font-size: 14px;
+                        font-weight: 400;
+                        margin-top: -30px;
+                    }
                 }
             }
             .top_message {
@@ -39,8 +59,10 @@
                 padding-left: 300px;
                 text-shadow: 0.1em 0.1em 0.2em black;
                 color: white;
-                @media (max-width: 428px) {
-                    padding-left: 18px;
+                @media (max-width: 768px) {
+                    padding: 0;
+                    margin: 30px 0;
+
                 }
             }
             .tabkeALook_btn {
@@ -53,17 +75,17 @@
                 font-size: 16px;
                 font-weight: 500;
                 padding: 9px;
-                @media (max-width: 428px) {
-                    margin-bottom: 40px;
+                @media (max-width: 768px) {
+                    margin: 40px 0;
                 }
             }
         }
         .first_view {
+            width: 100%;
             .cardList {
                 display: flex;
                 justify-content: center;
                 padding: 60px;
-                
                 .card {
                     width: 30%;
                     > div {
@@ -76,42 +98,63 @@
                         }
                     }
                 }
+                @media (max-width: 768px) {
+                    padding: 10px;
+                    .card {
+                        width: 100%;
+                        > div {
+                            padding: 20px 0;
+                            > h4 {
+                                display: none;
+                            }
+                        }
+                    }
+                }
             }
         }
         .second_view {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 60px 300px 60px 300px;
+            padding: 60px 100px 60px 100px;
             background-color: #f5f5f5;
-            @media (max-width: 428px) {
-                padding: 40px 18px;
+            @media (max-width: 768px) {
+                width: 100%;
+                flex-direction: column;
+                padding: 10px 0;
             }
-            > div {
-                display: flex;
-                > div:nth-child(1) {
-                    width: 50%;
-                    margin-right: 5%;
-                    > img {
-                        width: 100%;
+            > div:nth-child(1) {
+                width: 50%;
+                margin-right: 5%;
+                > img {
+                    width: 100%;
+                }
+                @media (max-width: 768px) {
+                    width: 95%;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+            > div:nth-child(2) {
+                width: 50%;
+                .sencond_title {
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+                .sencond_message {
+                    margin-top: 20px;
+                }
+                > div {
+                    > p {
+                        font-size: 18px;
                     }
                 }
-                > div:nth-child(2) {
-                    width: 50%;
+                @media (max-width: 768px) {
+                    width: 95%;
+                    margin: 0;
+                    padding: 0;
                     .sencond_title {
-                        font-size: 20px;
-                        font-weight: 700;
-                    }
-                    .sencond_message {
-                        margin-top: 20px;
-                        @media (max-width: 428px) {
-                            width: 100%;
-                        }
-                    }
-                    > div {
-                        > p {
-                            font-size: 18px;
-                        }
+                        text-align: center;
                     }
                 }
             }
@@ -124,6 +167,12 @@
             flex-wrap: wrap;
             justify-content: space-between;
             width: 90%;
+            @media (max-width: 768px) {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 2%;
+                width: 96%;
+            }
             .card {
                 width: 30%;
                 margin: 1%;
@@ -131,10 +180,25 @@
                 .card_message {
                     padding: 10%;
                 }
-
                 &:hover {
                     background-color: white;
                     opacity: 0.7;
+                    .card_message {
+                        > h3 {
+                            text-shadow: 0.1em 0.1em 0.2em white;
+                            font-weight: 700;
+                            color: rgb(228, 6, 57);
+                        }
+                        > h4 {
+                            text-shadow: 0.1em 0.1em 0.2em white;
+                            font-weight: 400;
+                            color: black;
+                        }
+                    }
+                }
+                @media (max-width: 768px) {
+                    width: 95%;
+                    margin-bottom: 10px;
                     .card_message {
                         > h3 {
                             text-shadow: 0.1em 0.1em 0.2em white;
