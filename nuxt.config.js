@@ -24,7 +24,7 @@ export default {
       { property: 'og:description', content: '浤賀有限公司 | HongHe 蔬菜貿易、蔬果批發、蔬果進口、農產品買賣，商品大白菜、白蘿蔔、高麗菜、青花菜、美生菜、南瓜，公司主旨健康、效率、永續經營' },
       { property: 'og:url', content: 'https://dwm331.github.io/HongHe/' },
       { name: 'google-site-verification', content: 'XcnBcvJXnhxMKG5AoFu9t_vXLBirG4kVOgXr-tXRm1c' },
-      { name: 'msvalidate.01', content: '6C6978AE2A09447984DC766D7968AF93' },
+      { name: 'msvalidate.01', content: 'E1A716417EA63AD8F62A4D7AE9368303' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
