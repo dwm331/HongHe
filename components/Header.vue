@@ -1,23 +1,23 @@
 <template>
   <header :class="['site-header', { 'is-scrolled': isScrolled }]">
     <div class="header-inner">
-      <a class="logo" href="/">
+      <nuxt-link class="logo" to="/">
         <img src="~/static/img/logo.jpeg" alt="浤賀有限公司" />
         <span>浤賀有限公司</span>
-      </a>
+      </nuxt-link>
 
       <nav class="nav" :class="{ 'is-open': menuOpen }">
         <ul class="nav-list">
-          <li><a href="/#brand" @click="close">品牌故事</a></li>
+          <li><nuxt-link :to="homeHash('brand')" @click.native="close">品牌故事</nuxt-link></li>
           <li class="has-sub">
-            <a href="/#products">產品介紹</a>
+            <nuxt-link :to="homeHash('products')">產品介紹</nuxt-link>
             <ul class="sub-menu">
-              <li><a href="/#products" @click="close">國產蔬菜</a></li>
-              <li><a href="/#products" @click="close">進口蔬菜</a></li>
+              <li><nuxt-link :to="homeHash('products')" @click.native="close">國產蔬菜</nuxt-link></li>
+              <li><nuxt-link :to="homeHash('products')" @click.native="close">進口蔬菜</nuxt-link></li>
             </ul>
           </li>
-          <li><a href="/news" @click="close">最新消息</a></li>
-          <li><a href="/contact-me" @click="close">聯絡我們</a></li>
+          <li><nuxt-link to="/news" @click.native="close">最新消息</nuxt-link></li>
+          <li><nuxt-link to="/contact-me" @click.native="close">聯絡我們</nuxt-link></li>
         </ul>
       </nav>
 
@@ -65,7 +65,10 @@ export default {
   },
   methods: {
     onScroll () { this.isScrolled = window.scrollY > 60 },
-    close () { this.menuOpen = false }
+    close () { this.menuOpen = false },
+    homeHash (id) {
+      return this.$route.path === '/' ? `#${id}` : `/#${id}`
+    }
   }
 }
 </script>
