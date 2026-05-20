@@ -118,8 +118,8 @@
               ></textarea>
             </div>
 
-            <!-- hCaptcha widget -->
-            <div id="hcaptcha-box" class="form-group"></div>
+            <!-- Cloudflare Turnstile widget -->
+            <div id="turnstile-box" class="form-group"></div>
             <p v-if="captchaError" class="captcha-error">請先完成人機驗證</p>
 
             <button type="submit" class="submit-btn" :disabled="sending">
@@ -144,14 +144,14 @@
 </template>
 
 <script>
-const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'  // ← 填入 web3forms.com 的 access key
-const HCAPTCHA_SITEKEY = 'YOUR_HCAPTCHA_SITEKEY'   // ← 填入 hcaptcha.com 的 sitekey
+const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'    // ← 填入 web3forms.com 的 access key
+const TURNSTILE_SITEKEY = 'YOUR_TURNSTILE_SITEKEY'   // ← 填入 Cloudflare Turnstile 的 site key
 
 export default {
   head () {
     return {
       title: '聯絡我們 | HongHe – 浤賀有限公司 x 廉使蔬果生產合作社',
-      script: [{ src: 'https://js.hcaptcha.com/1/api.js', async: true, defer: true }]
+      script: [{ src: 'https://challenges.cloudflare.com/turnstile/v0/api.js', async: true, defer: true }]
     }
   },
   data () {
@@ -165,18 +165,18 @@ export default {
     }
   },
   mounted () {
-    this._renderCaptcha()
+    this._renderTurnstile()
   },
   methods: {
-    _renderCaptcha () {
-      if (window.hcaptcha) {
-        window.hcaptcha.render('hcaptcha-box', {
-          sitekey: HCAPTCHA_SITEKEY,
+    _renderTurnstile () {
+      if (window.turnstile) {
+        window.turnstile.render('#turnstile-box', {
+          sitekey: TURNSTILE_SITEKEY,
           callback: (token) => { this.captchaToken = token; this.captchaError = false },
           'expired-callback': () => { this.captchaToken = '' }
         })
       } else {
-        setTimeout(() => this._renderCaptcha(), 400)
+        setTimeout(() => this._renderTurnstile(), 400)
       }
     },
     async handleSubmit () {
@@ -192,7 +192,7 @@ export default {
             subject: `[浤賀官網] ${this.form.subject}`,
             from_name: this.form.name,
             ...this.form,
-            'h-captcha-response': this.captchaToken
+            'cf-turnstile-response': this.captchaToken
           })
         })
         const data = await res.json()
@@ -213,7 +213,7 @@ export default {
       this.captchaError = false
       this.sendError = false
       this.form = { name: '', email: '', subject: '', message: '' }
-      this.$nextTick(() => this._renderCaptcha())
+      this.$nextTick(() => this._renderTurnstile())
     }
   }
 }
