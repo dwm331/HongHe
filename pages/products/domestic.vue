@@ -53,10 +53,6 @@
                 <span class="posts-count">{{ domesticCount }}</span>
               </li>
               <li>
-                <nuxt-link to="/news">最新消息</nuxt-link>
-                <span class="posts-count">1</span>
-              </li>
-              <li>
                 <nuxt-link to="/products/import">進口蔬菜</nuxt-link>
                 <span class="posts-count">{{ importCount }}</span>
               </li>
