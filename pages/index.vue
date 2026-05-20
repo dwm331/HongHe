@@ -488,10 +488,12 @@ export default {
   max-width: 1400px;
   margin: 0 auto 36px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   border-bottom: 1px solid #ebebeb;
-  padding-bottom: 16px;
+  padding-bottom: 24px;
+  gap: 12px;
 }
 .post-head-left h2 {
   font-size: 22px;
