@@ -2,216 +2,298 @@
   <div class="wrapper">
     <Header />
 
-    <section class="page-banner" :style="{ backgroundImage: `url(${$imgPath('main_bg.jpg')})` }">
-      <div class="banner-overlay"></div>
-      <div class="banner-content">
-        <span class="sec-tag">PRODUCTS</span>
-        <h1>國產蔬菜</h1>
-        <p>嚴選台灣在地優質蔬菜，新鮮直送</p>
-      </div>
-    </section>
+    <div class="archive-wrap">
+      <div class="archive-container">
 
-    <section class="products-list">
-      <div class="products-grid">
-        <nuxt-link
-          v-for="p in products"
-          :key="p.slug"
-          :to="`/news/${p.slug}`"
-          class="product-card"
-        >
-          <div class="product-thumb">
-            <img :src="$imgPath(p.img)" :alt="p.name" />
-          </div>
-          <div class="product-body">
-            <div class="product-tags">
-              <span v-for="tag in p.tags" :key="tag" class="tag">{{ tag }}</span>
+        <!-- Main Content -->
+        <main class="archive-main">
+          <article
+            v-for="p in products"
+            :key="p.slug"
+            class="post-article"
+          >
+            <nuxt-link class="post-thumbnail" :to="`/news/${p.slug}`" tabindex="-1">
+              <img :src="$imgPath(p.img)" :alt="p.title" width="360" height="210" />
+            </nuxt-link>
+
+            <div class="entry">
+              <header class="entry-header">
+                <div class="cat-links">
+                  <span
+                    v-for="(cat, i) in p.categories"
+                    :key="cat"
+                  ><nuxt-link :to="cat === '進口蔬菜' ? '/products/import' : '/products/domestic'">{{ cat }}</nuxt-link><span v-if="i < p.categories.length - 1">, </span></span>
+                </div>
+                <h2 class="entry-title">
+                  <nuxt-link :to="`/news/${p.slug}`">{{ p.title }}</nuxt-link>
+                </h2>
+              </header>
+
+              <div class="entry-summary">
+                <p>{{ p.excerpt }}</p>
+              </div>
+
+              <footer class="entry-footer">
+                <div class="entry-meta">
+                  <time :datetime="p.date">{{ p.date }}</time>
+                </div>
+              </footer>
             </div>
-            <h2>{{ p.name }}</h2>
-            <p>{{ p.desc }}</p>
-            <span class="read-more">了解更多 →</span>
-          </div>
-        </nuxt-link>
+          </article>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="archive-sidebar">
+          <!-- Categories -->
+          <section class="widget widget-categories">
+            <h2 class="widget-title">分類</h2>
+            <ul>
+              <li class="current-cat">
+                <nuxt-link to="/products/domestic">國產蔬菜</nuxt-link>
+                <span class="posts-count">{{ domesticCount }}</span>
+              </li>
+              <li>
+                <nuxt-link to="/news">最新消息</nuxt-link>
+                <span class="posts-count">1</span>
+              </li>
+              <li>
+                <nuxt-link to="/products/import">進口蔬菜</nuxt-link>
+                <span class="posts-count">{{ importCount }}</span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Featured Posts -->
+          <section class="widget widget-featured">
+            <h2 class="widget-title">精選文章</h2>
+            <ul>
+              <li v-for="f in featured" :key="f.slug">
+                <nuxt-link class="featured-thumb" :to="`/news/${f.slug}`">
+                  <img :src="$imgPath(f.img)" :alt="f.title" />
+                </nuxt-link>
+                <div class="featured-info">
+                  <div class="cat-links">
+                    <span v-for="(cat, i) in f.categories" :key="cat">
+                      {{ cat }}<span v-if="i < f.categories.length - 1">, </span>
+                    </span>
+                  </div>
+                  <nuxt-link :to="`/news/${f.slug}`" class="featured-title">{{ f.title }}</nuxt-link>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </aside>
+
       </div>
-    </section>
+    </div>
 
     <Footer />
   </div>
 </template>
 
 <script>
+import allNews from '~/assets/data/news.js'
+
 export default {
   head () {
     return { title: '國產蔬菜 | 浤賀有限公司 HongHe' }
   },
   data () {
+    const products = allNews.filter(n => n.categories.includes('國產蔬菜'))
+    const importArticles = allNews.filter(n => n.categories.includes('進口蔬菜'))
     return {
-      products: [
-        {
-          slug: 'brand-story',
-          name: '跨越千里的故事',
-          img: 'prod-featured.jpg',
-          tags: ['品牌故事'],
-          desc: '創辦人周冠誠的品牌故事，從雲林出發，走向國際蔬果貿易市場，以誠信與品質建立口碑。'
-        },
-        {
-          slug: 'garlic-antibacterial',
-          name: '大蒜－抗菌防感冒',
-          img: 'prod-garlic.jpg',
-          tags: ['國產', '進口'],
-          desc: '大蒜含有天然蒜素（Allicin），具強效抗菌特性，日常食用有效提升免疫力，遠離感冒困擾。'
-        },
-        {
-          slug: 'onion-nutrition-antioxidant',
-          name: '洋蔥－營養豐富、抗氧化',
-          img: 'prod-onion.jpg',
-          tags: ['國產'],
-          desc: '洋蔥富含槲皮素等抗氧化物質，每日攝取有助於延緩老化，降低心血管疾病風險。'
-        },
-        {
-          slug: 'napa-cabbage-vitamins',
-          name: '大白菜－豐富維生素',
-          img: 'prod-napa.jpg',
-          tags: ['國產'],
-          desc: '冬季必備，含豐富維生素C及膳食纖維，每100克僅13大卡，是低卡健康飲食首選。'
-        },
-        {
-          slug: 'korean-napa-cabbage',
-          name: '韓流大白菜－營養多，消化好',
-          img: 'prod-korean.jpg',
-          tags: ['進口'],
-          desc: '口感爽脆，富含膳食纖維，幫助腸胃蠕動，製作韓式泡菜的最佳選擇。'
-        },
-        {
-          slug: 'potato-healthy-cheap',
-          name: '馬鈴薯－便宜又好吃',
-          img: 'prod-potato.jpg',
-          tags: ['國產'],
-          desc: '富含鉀、維生素B6，飽足感強，低卡高纖，是廚房百搭的健康食材。'
-        }
-      ]
+      products,
+      featured: products.slice(0, 3),
+      domesticCount: products.length,
+      importCount: importArticles.length
     }
   }
 }
 </script>
 
 <style>
-.page-banner {
-  position: relative;
-  min-height: 300px;
+/* ── Archive Layout ───────────────────────────────── */
+.archive-wrap {
   padding-top: 70px;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #fff;
+  min-height: 100vh;
 }
-.banner-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.52);
-}
-.banner-content {
-  position: relative;
-  text-align: center;
-  color: #fff;
-  padding: 40px 24px;
-}
-.banner-content .sec-tag {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: #7fc97a;
-  margin-bottom: 12px;
-}
-.banner-content h1 {
-  font-size: clamp(28px, 5vw, 44px);
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-.banner-content p {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0;
-}
-
-/* ── Products Grid ────────────────────────────────── */
-.products-list {
-  background: #f8faf8;
-  padding: 64px 5% 88px;
-}
-.products-grid {
+.archive-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 48px 5% 80px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: 1fr 300px;
+  gap: 48px;
+  align-items: start;
 }
-.product-card {
+
+/* ── Article Cards ────────────────────────────────── */
+.post-article {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 36px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid #ebebeb;
+}
+.post-article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.post-thumbnail {
+  flex-shrink: 0;
   display: block;
-  background: #fff;
-  border-radius: 14px;
+  width: 240px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
-  transition: transform 0.25s, box-shadow 0.25s;
-  color: inherit;
+  border-radius: 4px;
+}
+.post-thumbnail img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+.post-thumbnail:hover img { transform: scale(1.04); }
+
+.entry { flex: 1; min-width: 0; }
+.cat-links {
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.cat-links a {
+  color: #888;
   text-decoration: none;
+  transition: color 0.2s;
 }
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+.cat-links a:hover { color: #2d6a2d; }
+
+.entry-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  line-height: 1.5;
 }
-.product-thumb {
-  aspect-ratio: 360 / 210;
+.entry-title a {
+  color: #222;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.entry-title a:hover { color: #2d6a2d; }
+
+.entry-summary p {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.75;
+  margin: 0 0 12px;
+}
+.entry-meta time {
+  font-size: 12px;
+  color: #a2a2a2;
+  letter-spacing: 0.5px;
+}
+
+/* ── Sidebar ──────────────────────────────────────── */
+.archive-sidebar {
+  position: sticky;
+  top: 90px;
+}
+.widget {
+  background: #f8f8f8;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 28px;
+}
+.widget-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #333;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.widget-categories ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.widget-categories li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #ebebeb;
+  font-size: 14px;
+}
+.widget-categories li:last-child { border-bottom: none; }
+.widget-categories a {
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.widget-categories a:hover,
+.current-cat a { color: #2d6a2d; font-weight: 600; }
+.posts-count {
+  font-size: 12px;
+  color: #aaa;
+  background: #e8e8e8;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.widget-featured ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.widget-featured li {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.widget-featured li:last-child { margin-bottom: 0; }
+.featured-thumb {
+  flex-shrink: 0;
+  display: block;
+  width: 72px;
+  height: 48px;
   overflow: hidden;
-  background: #eee;
+  border-radius: 3px;
 }
-.product-thumb img {
+.featured-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s;
 }
-.product-card:hover .product-thumb img { transform: scale(1.04); }
-.product-body { padding: 20px 24px 24px; }
-.product-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+.featured-info .cat-links {
+  margin-bottom: 4px;
 }
-.tag {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  background: #e8f5e8;
-  color: #2d6a2d;
-}
-.product-body h2 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 8px;
+.featured-title {
+  font-size: 13px;
+  color: #444;
   line-height: 1.5;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s;
 }
-.product-body p {
-  font-size: 13px;
-  color: #888;
-  line-height: 1.8;
-  margin-bottom: 14px;
-}
-.read-more {
-  font-size: 13px;
-  color: #2d6a2d;
-  font-weight: 600;
-}
+.featured-title:hover { color: #2d6a2d; }
 
-@media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .archive-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .archive-sidebar { position: static; }
+}
 @media (max-width: 600px) {
-  .products-grid { grid-template-columns: 1fr; }
-  .products-list { padding: 40px 4% 64px; }
+  .post-article { flex-direction: column; }
+  .post-thumbnail { width: 100%; }
+  .post-thumbnail img { height: 200px; }
+  .archive-container { padding: 32px 4% 60px; }
 }
 </style>
