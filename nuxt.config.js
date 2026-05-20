@@ -8,7 +8,7 @@ export default {
     ...routerBase,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '浤賀有限公司 | HongHe',
+    title: 'HongHe – 浤賀有限公司 x 廉使蔬果生產合作社',
     htmlAttrs: {
       lang: 'en'
     },

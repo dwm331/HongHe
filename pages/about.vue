@@ -43,7 +43,7 @@
 <script>
 export default {
   head () {
-    return { title: '品牌故事 | 浤賀有限公司 HongHe' }
+    return { title: '品牌故事 | HongHe – 浤賀有限公司 x 廉使蔬果生產合作社' }
   }
 }
 </script>

@@ -44,7 +44,7 @@ import allNews from '~/assets/data/news.js'
 
 export default {
   head () {
-    return { title: '國產蔬菜 | 浤賀有限公司 HongHe' }
+    return { title: '國產蔬菜 | HongHe – 浤賀有限公司 x 廉使蔬果生產合作社' }
   },
   data () {
     return {

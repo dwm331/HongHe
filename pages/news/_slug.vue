@@ -79,7 +79,7 @@ export default {
   },
   head () {
     return {
-      title: `${this.article.title} | 浤賀有限公司 HongHe`
+      title: `${this.article.title} | HongHe – 浤賀有限公司 x 廉使蔬果生產合作社`
     }
   }
 }
