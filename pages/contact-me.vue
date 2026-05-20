@@ -118,7 +118,14 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">傳送訊息</button>
+            <!-- hCaptcha widget -->
+            <div id="hcaptcha-box" class="form-group"></div>
+            <p v-if="captchaError" class="captcha-error">請先完成人機驗證</p>
+
+            <button type="submit" class="submit-btn" :disabled="sending">
+              {{ sending ? '傳送中…' : '傳送訊息' }}
+            </button>
+            <p v-if="sendError" class="send-error">傳送失敗，請稍後再試。</p>
           </form>
 
           <div v-else class="thank-you">
@@ -137,30 +144,76 @@
 </template>
 
 <script>
+const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'  // ← 填入 web3forms.com 的 access key
+const HCAPTCHA_SITEKEY = 'YOUR_HCAPTCHA_SITEKEY'   // ← 填入 hcaptcha.com 的 sitekey
+
 export default {
   head () {
     return {
-      title: '聯絡我們 | 浤賀有限公司 HongHe'
+      title: '聯絡我們 | HongHe – 浤賀有限公司 x 廉使蔬果生產合作社',
+      script: [{ src: 'https://js.hcaptcha.com/1/api.js', async: true, defer: true }]
     }
   },
   data () {
     return {
       submitted: false,
-      form: {
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      }
+      sending: false,
+      captchaToken: '',
+      captchaError: false,
+      sendError: false,
+      form: { name: '', email: '', subject: '', message: '' }
     }
   },
+  mounted () {
+    this._renderCaptcha()
+  },
   methods: {
-    handleSubmit () {
-      this.submitted = true
+    _renderCaptcha () {
+      if (window.hcaptcha) {
+        window.hcaptcha.render('hcaptcha-box', {
+          sitekey: HCAPTCHA_SITEKEY,
+          callback: (token) => { this.captchaToken = token; this.captchaError = false },
+          'expired-callback': () => { this.captchaToken = '' }
+        })
+      } else {
+        setTimeout(() => this._renderCaptcha(), 400)
+      }
+    },
+    async handleSubmit () {
+      if (!this.captchaToken) { this.captchaError = true; return }
+      this.sending = true
+      this.sendError = false
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: `[浤賀官網] ${this.form.subject}`,
+            from_name: this.form.name,
+            ...this.form,
+            'h-captcha-response': this.captchaToken
+          })
+        })
+        const data = await res.json()
+        if (data.success) {
+          this.submitted = true
+        } else {
+          this.sendError = true
+        }
+      } catch {
+        this.sendError = true
+      } finally {
+        this.sending = false
+      }
     },
     resetForm () {
       this.submitted = false
+      this.captchaToken = ''
+      this.captchaError = false
+      this.sendError = false
       this.form = { name: '', email: '', subject: '', message: '' }
+      this.$nextTick(() => this._renderCaptcha())
     }
   }
 }
@@ -348,6 +401,16 @@ export default {
   background: #fff;
 }
 .form-group textarea { resize: vertical; }
+.captcha-error, .send-error {
+  font-size: 13px;
+  color: #d32f2f;
+  margin: -8px 0 12px;
+}
+.submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
 .submit-btn {
   width: 100%;
   padding: 14px;
