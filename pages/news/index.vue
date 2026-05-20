@@ -2,36 +2,29 @@
   <div class="wrapper">
     <Header />
 
-    <!-- Page Banner -->
-    <section class="page-banner" :style="{ backgroundImage: `url(${$imgPath('main_bg.jpg')})` }">
-      <div class="banner-overlay"></div>
-      <div class="banner-content">
-        <span class="sec-tag">NEWS</span>
+    <!-- Page Header (原站 entry-header 結構) -->
+    <header
+      class="news-header"
+      :style="{ backgroundImage: `url(${$imgPath('news-bg.jpg')})` }"
+    >
+      <div class="news-header-overlay"></div>
+      <div class="news-header-titles">
         <h1>最新消息</h1>
-        <p>Announcing freshly listed vegetable varieties to satisfy your palate</p>
+        <h4>「新鮮上市」 最新蔬菜品種鮮嫩登場，滿足您的味蕾。</h4>
       </div>
-    </section>
+    </header>
 
-    <!-- News Grid -->
+    <!-- Article List (原站 wp-block-post-template 結構：只有標題 + 日期) -->
     <section class="news-list-section">
-      <div class="news-grid">
-        <nuxt-link
-          v-for="n in news"
-          :key="n.slug"
-          :to="`/news/${n.slug}`"
-          class="news-card"
-        >
-          <div
-            class="news-thumb"
-            :style="{ backgroundImage: `url(${$imgPath(n.img)})` }"
-          ></div>
-          <div class="news-body">
-            <span class="news-date">{{ n.date }}</span>
-            <h2>{{ n.title }}</h2>
-            <p>{{ n.excerpt }}</p>
-            <span class="read-more">繼續閱讀 →</span>
-          </div>
-        </nuxt-link>
+      <div class="news-container">
+        <ul class="news-post-list">
+          <li v-for="n in news" :key="n.slug" class="news-post-item">
+            <h4>
+              <nuxt-link :to="`/news/${n.slug}`">{{ n.title }}</nuxt-link>
+            </h4>
+            <time class="post-date">{{ n.date }}</time>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -53,111 +46,84 @@ export default {
 </script>
 
 <style>
-.page-banner {
+/* ── Page Header ─────────────────────────────────────── */
+.news-header {
   position: relative;
-  min-height: 300px;
   padding-top: 70px;
+  min-height: 320px;
   background-size: cover;
   background-position: center;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
 }
-.banner-overlay {
+.news-header-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.52);
+  background: rgba(0, 0, 0, 0.3);
 }
-.banner-content {
+.news-header-titles {
   position: relative;
-  text-align: center;
+  padding: 48px 5% 40px;
   color: #fff;
-  padding: 40px 24px;
 }
-.banner-content .sec-tag {
-  display: inline-block;
-  font-size: 12px;
+.news-header-titles h1 {
+  font-size: clamp(28px, 5vw, 48px);
   font-weight: 700;
-  letter-spacing: 5px;
-  color: #7fc97a;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
 }
-.banner-content h1 {
-  font-size: clamp(28px, 5vw, 44px);
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-.banner-content p {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0;
-}
-
-.news-list-section {
-  padding: 64px 5% 80px;
-  background: #f8faf8;
-}
-.news-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-.news-card {
-  display: block;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
-  transition: transform 0.25s, box-shadow 0.25s;
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
-}
-.news-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
-}
-.news-thumb {
-  height: 190px;
-  background-size: cover;
-  background-position: center;
-}
-.news-body {
-  padding: 20px 24px 24px;
-}
-.news-date {
-  font-size: 12px;
-  color: #aaa;
-  letter-spacing: 1px;
-  display: block;
-  margin-bottom: 8px;
-}
-.news-body h2 {
+.news-header-titles h4 {
   font-size: 16px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-.news-body p {
-  font-size: 13px;
-  color: #888;
-  line-height: 1.8;
-  margin-bottom: 14px;
-}
-.read-more {
-  font-size: 13px;
-  color: #2d6a2d;
-  font-weight: 600;
+  font-weight: 400;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.5px;
 }
 
-@media (max-width: 1024px) {
-  .news-grid { grid-template-columns: repeat(2, 1fr); }
+/* ── Article List ─────────────────────────────────────── */
+.news-list-section {
+  padding: 64px 0 96px;
+  background: #fff;
 }
+.news-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+.news-post-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.news-post-item {
+  padding: 28px 0;
+  border-bottom: 1px solid #ebebeb;
+}
+.news-post-item:first-child {
+  border-top: 1px solid #ebebeb;
+}
+.news-post-item h4 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.news-post-item h4 a {
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.news-post-item h4 a:hover {
+  color: #2d6a2d;
+}
+.post-date {
+  display: block;
+  font-size: 13px;
+  color: #a2a2a2;
+  letter-spacing: 0.5px;
+}
+
 @media (max-width: 600px) {
-  .news-grid { grid-template-columns: 1fr; }
-  .news-list-section { padding: 40px 4% 60px; }
+  .news-header-titles { padding: 40px 6% 32px; }
+  .news-list-section { padding: 40px 0 64px; }
 }
 </style>
