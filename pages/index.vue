@@ -76,22 +76,31 @@
     </section>
 
     <!-- ─── 公司資訊 ────────────────────────────────────────────── -->
-    <section class="company-section">
+    <section
+      class="company-section"
+      :style="{ backgroundImage: `url(${$imgPath('products-banner.jpg')})` }"
+    >
+      <div class="company-overlay"></div>
       <div class="company-inner">
-        <div class="company-text-block">
-          <h2>公司資訊</h2>
-          <p>歡迎蒞臨，邀您指導</p>
-          <a
-            href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9"
-            target="_blank" rel="noopener"
-            class="addr-link"
-          >our address</a>
+        <!-- 上排：標題 + our address -->
+        <div class="company-header">
+          <div class="company-header-left">
+            <h2>公司資訊</h2>
+            <p>歡迎蒞臨，邀您指導</p>
+          </div>
+          <div class="company-header-right">
+            <a
+              href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9"
+              target="_blank" rel="noopener"
+            >our address</a>
+          </div>
         </div>
+        <!-- 下排：兩張圖 -->
         <div class="company-images">
-          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener">
+          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener" class="company-banner">
             <img :src="$imgPath('company-1.jpg')" alt="公司照片" />
           </a>
-          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener">
+          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener" class="company-banner">
             <img :src="$imgPath('company-map.jpg')" alt="地圖" />
           </a>
         </div>
@@ -413,48 +422,62 @@ export default {
 
 /* ── Company ──────────────────────────────────────────── */
 .company-section {
-  background: #f7f7f7;
-  padding: 60px 5%;
+  position: relative;
+  background-color: #daeaf2;
+  background-size: cover;
+  background-position: center;
+  padding: 60px 30px;
+  color: #fff;
+}
+.company-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #353d16;
+  opacity: 0.77;
 }
 .company-inner {
+  position: relative;
   max-width: 1400px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 5fr;
-  gap: 48px;
-  align-items: center;
 }
-.company-text-block h2 {
-  font-size: 22px;
+/* 上排：標題 + our address */
+.company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+.company-header-left h2 {
+  font-size: 24px;
   font-weight: 500;
-  color: #222;
+  color: #fff;
   margin: 0 0 8px;
 }
-.company-text-block p {
+.company-header-left p {
   font-size: 15px;
-  color: #888;
-  margin: 0 0 14px;
+  color: rgba(255,255,255,0.85);
+  margin: 0;
 }
-.addr-link {
+.company-header-right a {
   font-size: 12px;
   letter-spacing: 3px;
-  color: #555;
+  color: #fff;
   text-decoration: underline;
 }
+/* 下排：兩張圖 */
 .company-images {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
-.company-images a { display: block; overflow: hidden; }
-.company-images img {
+.company-banner { display: block; overflow: hidden; }
+.company-banner img {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  height: auto;
   display: block;
   transition: transform 0.4s;
 }
-.company-images a:hover img { transform: scale(1.03); }
+.company-banner:hover img { transform: scale(1.03); }
 
 /* ── Post Grid (matches konte-post-grid columns-3 columns-gap-40) ── */
 .post-section {
