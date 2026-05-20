@@ -2,7 +2,7 @@
   <header :class="['site-header', { 'is-scrolled': isScrolled }]">
     <div class="header-inner">
       <nuxt-link class="logo" to="/">
-        <img src="~/static/img/logo-full.png" alt="浤賀有限公司" />
+        <img src="~/static/img/logo-dark.png" alt="HongHe" />
       </nuxt-link>
 
       <nav class="nav" :class="{ 'is-open': menuOpen }">
@@ -103,8 +103,8 @@ export default {
   flex-shrink: 0;
 }
 .logo img {
-  height: 48px;
-  width: auto;
+  width: 130px;
+  height: auto;
   display: block;
   object-fit: contain;
 }
@@ -125,7 +125,7 @@ export default {
   border-radius: 6px;
   transition: color 0.2s, background 0.2s;
 }
-.nav-list > li > a:hover { color: #2d6a2d; background: #f0f8f0; }
+.nav-list > li > a:hover { color: #111; background: #f5f5f5; }
 
 /* Dropdown */
 .has-sub .sub-menu {
@@ -155,7 +155,7 @@ export default {
   transition: background 0.15s, color 0.15s;
   white-space: nowrap;
 }
-.sub-menu li a:hover { background: #f0f8f0; color: #2d6a2d; }
+.sub-menu li a:hover { background: #f5f5f5; color: #111; }
 
 /* Header right */
 .header-right {
@@ -174,7 +174,7 @@ export default {
   color: #555;
   transition: color 0.2s, background 0.2s;
 }
-.social-btn:hover { color: #2d6a2d; background: #f0f8f0; }
+.social-btn:hover { color: #111; background: #f0f0f0; }
 
 /* Hamburger */
 .hamburger {
