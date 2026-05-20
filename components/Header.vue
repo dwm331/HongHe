@@ -2,8 +2,7 @@
   <header :class="['site-header', { 'is-scrolled': isScrolled }]">
     <div class="header-inner">
       <nuxt-link class="logo" to="/">
-        <img src="~/static/img/logo.jpeg" alt="浤賀有限公司" />
-        <span>浤賀有限公司</span>
+        <img src="~/static/img/logo-full.png" alt="浤賀有限公司" />
       </nuxt-link>
 
       <nav class="nav" :class="{ 'is-open': menuOpen }">
@@ -101,18 +100,13 @@ export default {
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: #2d6a2d;
-  font-size: 18px;
-  font-weight: 700;
-  white-space: nowrap;
   flex-shrink: 0;
 }
 .logo img {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  object-fit: cover;
+  height: 48px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 /* Nav */

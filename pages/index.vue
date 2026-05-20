@@ -237,9 +237,9 @@ export default {
         { title: '蔬果清洗小技巧', img: 'v1_1.jpeg' }
       ],
       partners: [
-        { name: '廉使蔬果生產合作社', img: 'logo.jpeg' },
-        { name: '優質蔬果供應商', img: 'logo.jpeg' },
-        { name: '農產品貿易夥伴', img: 'logo.jpeg' }
+        { name: '廉使蔬果生產合作社', img: 'partner1.jpg' },
+        { name: '優質蔬果供應商', img: 'partner2.jpeg' },
+        { name: '農產品貿易夥伴', img: 'partner3.jpg' }
       ]
     }
   },
@@ -686,17 +686,16 @@ export default {
   font-size: 14px;
 }
 .partner-item img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  filter: grayscale(30%);
-  transition: filter 0.2s, transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 .partner-item:hover img {
-  filter: none;
-  transform: scale(1.05);
+  transform: scale(1.04);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
 }
 
 /* ── Responsive ───────────────────────────────────────── */

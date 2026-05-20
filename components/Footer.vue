@@ -4,7 +4,7 @@
       <div class="footer-brand">
         <div class="brand-name">雲林浤賀蔬果</div>
         <div class="brand-avatar">
-          <img src="~/static/img/logo.jpeg" alt="浤賀有限公司" />
+          <img src="~/static/img/logo-full.png" alt="浤賀有限公司" />
         </div>
         <div class="brand-desc">
           <p>蔬果・花卉進口</p>
@@ -99,10 +99,10 @@
   margin-bottom: 20px;
 }
 .brand-avatar img {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  object-fit: cover;
+  max-width: 140px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
   margin-bottom: 18px;
 }
 .brand-desc {
