@@ -35,6 +35,7 @@
 
     <!-- ─── Category Banners ───────────────────────────────────── -->
     <section class="cat-section">
+      <div class="cat-container">
       <div class="cat-col cat-col-left">
         <div
           v-for="item in catLeft"
@@ -70,6 +71,7 @@
             </span>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -322,15 +324,20 @@ export default {
 
 /* ── Category Banners (matching konte-category-banner CSS) ── */
 .cat-section {
-  display: flex;
   background: #fff;
+  padding: 0 40px;
+}
+.cat-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
 }
 .cat-col {
   flex: 1;
-  padding: 0 25px;
+  padding: 30px 20px 0;
 }
-.cat-col-left  { padding-left: 60px; }
-.cat-col-right { padding-right: 60px; }
+.cat-col-left  { padding-left: 40px; }
+.cat-col-right { padding-right: 40px; }
 
 /* Matches original: .konte-category-banner */
 .konte-category-banner {
