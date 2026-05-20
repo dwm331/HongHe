@@ -63,7 +63,7 @@
       rel="noopener"
       aria-label="LINE 線上詢問"
     >
-      <img src="https://a.fenstudio.tw/dn/IMG/LINE-Client.svg" alt="LINE" />
+      <img :src="$imgPath('line-client.svg')" alt="LINE" />
       <span class="line-tooltip">線上詢問</span>
     </a>
   </footer>

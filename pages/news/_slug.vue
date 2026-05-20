@@ -5,7 +5,7 @@
     <!-- Article Banner -->
     <section
       class="article-banner"
-      :style="{ backgroundImage: `url('/img/${article.img}')` }"
+      :style="{ backgroundImage: `url(${$imgPath(article.img)})` }"
     >
       <div class="banner-overlay"></div>
       <div class="banner-content">
@@ -50,7 +50,7 @@
             >
               <div
                 class="other-thumb"
-                :style="{ backgroundImage: `url('/img/${n.img}')` }"
+                :style="{ backgroundImage: `url(${$imgPath(n.img)})` }"
               ></div>
               <div class="other-info">
                 <span class="news-date">{{ n.date }}</span>

@@ -3,7 +3,7 @@
     <Header />
 
     <!-- Page Banner -->
-    <section class="page-banner">
+    <section class="page-banner" :style="{ backgroundImage: `url(${$imgPath('main_bg.jpg')})` }">
       <div class="banner-overlay"></div>
       <div class="banner-content">
         <span class="sec-tag">NEWS</span>
@@ -23,7 +23,7 @@
         >
           <div
             class="news-thumb"
-            :style="{ backgroundImage: `url('/img/${n.img}')` }"
+            :style="{ backgroundImage: `url(${$imgPath(n.img)})` }"
           ></div>
           <div class="news-body">
             <span class="news-date">{{ n.date }}</span>
@@ -57,7 +57,6 @@ export default {
   position: relative;
   min-height: 300px;
   padding-top: 70px;
-  background-image: url('/img/main_bg.jpg');
   background-size: cover;
   background-position: center;
   display: flex;

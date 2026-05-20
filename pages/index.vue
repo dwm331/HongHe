@@ -10,6 +10,7 @@
           :key="i"
           class="slide"
           :class="{ 'is-active': activeSlide === i }"
+          :style="{ backgroundImage: `url(${$imgPath('main_bg.jpg')})` }"
         >
           <div class="slide-content">
             <span class="slide-badge">I believe! I honghe!</span>
@@ -40,7 +41,7 @@
     <section class="features">
       <div class="features-inner">
         <div v-for="f in features" :key="f.title" class="feature-card">
-          <img :src="`/img/icon/${f.icon}`" :alt="f.title" class="feature-icon" />
+          <img :src="`${$imgPath('icon/' + f.icon)}`" :alt="f.title" class="feature-icon" />
           <h3>{{ f.title }}</h3>
           <p>{{ f.desc }}</p>
         </div>
@@ -80,7 +81,7 @@
         <div v-for="p in products" :key="p.name" class="product-card">
           <div
             class="product-thumb"
-            :style="{ backgroundImage: `url('/img/${p.img}')` }"
+            :style="{ backgroundImage: `url(${$imgPath(p.img)})` }"
           ></div>
           <div class="product-info">
             <h3>{{ p.name }}</h3>
@@ -101,7 +102,7 @@
         <div v-for="n in news" :key="n.title" class="news-card">
           <div
             class="news-thumb"
-            :style="{ backgroundImage: `url('/img/${n.img}')` }"
+            :style="{ backgroundImage: `url(${$imgPath(n.img)})` }"
           ></div>
           <div class="news-body">
             <h3>{{ n.title }}</h3>
@@ -121,7 +122,7 @@
       <div class="video-grid">
         <div v-for="v in videos" :key="v.title" class="video-wrap">
           <div class="video-placeholder">
-            <img :src="`/img/${v.img}`" :alt="v.title" class="video-poster" />
+            <img :src="$imgPath(v.img)" :alt="v.title" class="video-poster" />
             <div class="play-circle">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
                 <path d="M8 5v14l11-7z"/>
@@ -140,7 +141,7 @@
       </div>
       <div class="partners-row">
         <div v-for="p in partners" :key="p.name" class="partner-item">
-          <img :src="p.img" :alt="p.name" />
+          <img :src="$imgPath(p.img)" :alt="p.name" />
           <span>{{ p.name }}</span>
         </div>
       </div>
@@ -236,9 +237,9 @@ export default {
         { title: '蔬果清洗小技巧', img: 'v1_1.jpeg' }
       ],
       partners: [
-        { name: '廉使蔬果生產合作社', img: '/img/logo.jpeg' },
-        { name: '優質蔬果供應商', img: '/img/logo.jpeg' },
-        { name: '農產品貿易夥伴', img: '/img/logo.jpeg' }
+        { name: '廉使蔬果生產合作社', img: 'logo.jpeg' },
+        { name: '優質蔬果供應商', img: 'logo.jpeg' },
+        { name: '農產品貿易夥伴', img: 'logo.jpeg' }
       ]
     }
   },
@@ -304,7 +305,6 @@ export default {
 .slide {
   position: absolute;
   inset: 0;
-  background-image: url('/img/main_bg.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
