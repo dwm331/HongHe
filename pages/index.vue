@@ -15,7 +15,7 @@
           <div class="slide-content">
             <span class="slide-badge">I believe! I honghe!</span>
             <h1 class="slide-title">{{ slide.title }}</h1>
-            <p class="slide-sub">{{ slide.sub }}</p>
+            <a class="slide-sub">{{ slide.sub }}</a>
           </div>
         </div>
       </div>
@@ -34,86 +34,88 @@
     </section>
 
     <!-- ─── Category Banners ───────────────────────────────────── -->
-    <section class="cat-banners">
+    <section class="cat-section">
       <div class="cat-col cat-col-left">
-        <nuxt-link
+        <div
           v-for="item in catLeft"
           :key="item.name"
-          :to="item.link"
-          class="cat-item"
+          class="konte-category-banner align-left title-bottom"
         >
-          <div class="cat-img-wrap">
-            <img :src="$imgPath(item.img)" :alt="item.name" />
-          </div>
-          <div class="cat-info">
-            <span class="cat-label">{{ item.label }}</span>
-            <h4 class="cat-title">{{ item.name }}</h4>
-            <p class="cat-desc">{{ item.desc }}</p>
-          </div>
-        </nuxt-link>
+          <nuxt-link :to="item.link" class="konte-category-banner__link">
+            <span class="konte-category-banner__category">{{ item.label }}</span>
+            <span class="konte-category-banner__image">
+              <img :src="$imgPath(item.img)" :alt="item.name" />
+            </span>
+            <span class="konte-category-banner__content">
+              <h4 class="konte-category-banner__title">{{ item.name }}</h4>
+              <span class="konte-category-banner__button">{{ item.desc }}</span>
+            </span>
+          </nuxt-link>
+        </div>
       </div>
       <div class="cat-col cat-col-right">
-        <nuxt-link
+        <div
           v-for="item in catRight"
           :key="item.name"
-          :to="item.link"
-          class="cat-item"
+          class="konte-category-banner align-right title-bottom"
         >
-          <div class="cat-img-wrap">
-            <img :src="$imgPath(item.img)" :alt="item.name" />
-          </div>
-          <div class="cat-info">
-            <span class="cat-label">{{ item.label }}</span>
-            <h4 class="cat-title">{{ item.name }}</h4>
-            <p class="cat-desc">{{ item.desc }}</p>
-          </div>
-        </nuxt-link>
+          <nuxt-link :to="item.link" class="konte-category-banner__link">
+            <span class="konte-category-banner__category">{{ item.label }}</span>
+            <span class="konte-category-banner__image">
+              <img :src="$imgPath(item.img)" :alt="item.name" />
+            </span>
+            <span class="konte-category-banner__content">
+              <h4 class="konte-category-banner__title">{{ item.name }}</h4>
+              <span class="konte-category-banner__button">{{ item.desc }}</span>
+            </span>
+          </nuxt-link>
+        </div>
       </div>
     </section>
 
     <!-- ─── 公司資訊 ────────────────────────────────────────────── -->
     <section class="company-section">
       <div class="company-inner">
-        <div class="company-text">
+        <div class="company-text-block">
           <h2>公司資訊</h2>
           <p>歡迎蒞臨，邀您指導</p>
           <a
-            class="company-addr"
             href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9"
             target="_blank" rel="noopener"
+            class="addr-link"
           >our address</a>
         </div>
         <div class="company-images">
-          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener" class="company-img-link">
-            <img :src="$imgPath('company-1.jpg')" alt="公司位置" />
+          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener">
+            <img :src="$imgPath('company-1.jpg')" alt="公司照片" />
           </a>
-          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener" class="company-img-link">
+          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener">
             <img :src="$imgPath('company-map.jpg')" alt="地圖" />
           </a>
         </div>
       </div>
     </section>
 
-    <!-- ─── 產品介紹 post grid ──────────────────────────────────── -->
+    <!-- ─── 產品介紹 Post Grid ──────────────────────────────────── -->
     <section class="post-section">
-      <div class="post-section-header">
-        <div>
+      <div class="post-section-head">
+        <div class="post-head-left">
           <h2>產品介紹</h2>
           <p>來自大地的鮮蔬</p>
         </div>
         <nuxt-link to="/products/domestic" class="our-blog-link">OUR BLOG</nuxt-link>
       </div>
-      <div class="post-grid">
-        <div v-for="p in posts" :key="p.slug" class="post-card">
-          <nuxt-link :to="`/news/${p.slug}`" class="post-thumb">
+      <div class="konte-post-grid columns-3 columns-gap-40 konte-post-grid--elementor">
+        <div v-for="p in posts" :key="p.slug" class="hentry">
+          <nuxt-link :to="`/news/${p.slug}`" class="post-thumbnail">
             <img :src="$imgPath(p.img)" :alt="p.title" />
           </nuxt-link>
-          <div class="post-summary">
+          <div class="konte-post-grid__summary">
             <h5 class="post-title">
               <nuxt-link :to="`/news/${p.slug}`">{{ p.title }}</nuxt-link>
             </h5>
-            <p class="post-excerpt">{{ p.excerpt }}</p>
-            <nuxt-link :to="`/news/${p.slug}`" class="continue-reading">Continue reading</nuxt-link>
+            <div class="post-summary">{{ p.excerpt }}</div>
+            <nuxt-link :to="`/news/${p.slug}`" class="button alt">Continue reading</nuxt-link>
           </div>
         </div>
       </div>
@@ -121,7 +123,7 @@
 
     <!-- ─── 影音專區 ────────────────────────────────────────────── -->
     <section class="video-section">
-      <div class="video-section-header">
+      <div class="video-head">
         <h2>影音專區</h2>
         <p>與你分享健康小知識</p>
       </div>
@@ -130,10 +132,8 @@
           <div class="video-wrap">
             <iframe
               src="https://www.youtube.com/embed/0Rl1tpOEwn4?controls=1&rel=0"
-              frameborder="0"
-              allowfullscreen
+              frameborder="0" allowfullscreen
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              title="越吃越凍齡"
             ></iframe>
           </div>
           <p>越吃越凍齡！青花菜、洋蔥、大蒜、菠菜等蔬菜，讓你年輕10歲!</p>
@@ -142,10 +142,8 @@
           <div class="video-wrap">
             <iframe
               src="https://www.youtube.com/embed/HEgcOPW45ZQ?controls=1&rel=0"
-              frameborder="0"
-              allowfullscreen
+              frameborder="0" allowfullscreen
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              title="蔬果如何洗"
             ></iframe>
           </div>
           <p>蔬果如何洗? 教你洗出不殘留農藥的健康好蔬果</p>
@@ -182,22 +180,22 @@ export default {
       activeSlide: 0,
       timer: null,
       slides: [
-        { bg: 'banner-slide1.jpg', theme: 'light', title: '每一步', sub: '都是邁向健康的一步' },
+        { bg: 'banner-slide1.jpg', theme: 'light', title: '每一步',  sub: '都是邁向健康的一步' },
         { bg: 'banner-slide2.jpg', theme: 'dark',  title: '美好生活', sub: '從均衡飲食開始' },
         { bg: 'products-banner.jpg', theme: 'light', title: '自然鮮蔬', sub: '一份蔬菜，一份健康' }
       ],
       catLeft: [
-        { img: 'cat-broccoli.jpg', name: '新鮮青花菜', desc: '富含維生素K，骨骼堅固，活力無限', label: 'See Our News', link: '/news/brand-story' },
-        { img: 'cat-cabbage.jpg',  name: '純淨高麗菜', desc: '清爽健康，營養均衡，全家人喜歡吃', label: 'Explore Now', link: '/products/domestic' },
-        { img: 'cat-potato2.jpg', name: '馬鈴薯', desc: '減脂、防癌、穩定血糖與調整血壓好幫手', label: 'See Our News', link: '/news/potato-healthy-cheap' },
-        { img: 'cat-onion.jpg',   name: '洋蔥', desc: '營養豐富，抗氧化，健康生活有保障', label: 'Explore Now', link: '/news/onion-nutrition-antioxidant' }
+        { img: 'cat-broccoli.jpg', name: '新鮮青花菜', desc: '富含維生素K，骨骼堅固，活力無限',            label: 'See Our News', link: '/products/domestic' },
+        { img: 'cat-cabbage.jpg',  name: '純淨高麗菜', desc: '清爽健康，營養均衡，全家人喜歡吃',          label: 'Explore Now',  link: '/products/domestic' },
+        { img: 'cat-potato2.jpg', name: '馬鈴薯',     desc: '減脂、防癌、穩定血糖與調整血壓好幫手',     label: 'See Our News', link: '/news/potato-healthy-cheap' },
+        { img: 'cat-onion.jpg',   name: '洋蔥',       desc: '營養豐富，抗氧化，健康生活有保障',          label: 'Explore Now',  link: '/news/onion-nutrition-antioxidant' }
       ],
       catRight: [
-        { img: 'cat-napa.jpg',    name: '韓流大白菜', desc: '營養多多，消化好，身心健康不煩惱', label: 'Explore Now', link: '/news/korean-napa-cabbage' },
-        { img: 'cat-radish.jpg',  name: '蘿蔔大長腿', desc: '營養豐富，血液暢通，健康有保障', label: 'See Our News', link: '/products/domestic' },
-        { img: 'cat-lettuce.jpg', name: '萵苣', desc: '脆爽多汁，纖維豐富，身心健康好選擇', label: 'Explore Now', link: '/products/domestic' },
-        { img: 'cat-romaine.jpg', name: '蘿蔓心', desc: '脆甜可口，纖維豐富，心臟健康保駕護航', label: 'Explore Now', link: '/products/domestic' },
-        { img: 'cat-garlic.jpg',  name: '大蒜', desc: '抗菌防感冒，健康生活無憂慮', label: 'Explore Now', link: '/news/garlic-antibacterial' }
+        { img: 'cat-napa.jpg',    name: '韓流大白菜', desc: '營養多多，消化好，身心健康不煩惱',          label: 'Explore Now',  link: '/news/korean-napa-cabbage' },
+        { img: 'cat-radish.jpg',  name: '蘿蔔大長腿', desc: '營養豐富，血液暢通，健康有保障',            label: 'See Our News', link: '/products/domestic' },
+        { img: 'cat-lettuce.jpg', name: '萵苣',       desc: '脆爽多汁，纖維豐富，身心健康好選擇',        label: 'Explore Now',  link: '/products/domestic' },
+        { img: 'cat-romaine.jpg', name: '蘿蔓心',     desc: '脆甜可口，纖維豐富，心臟健康保駕護航',      label: 'Explore Now',  link: '/products/domestic' },
+        { img: 'cat-garlic.jpg',  name: '大蒜',       desc: '抗菌防感冒，健康生活無憂慮',               label: 'Explore Now',  link: '/news/garlic-antibacterial' }
       ],
       posts: allNews.filter(n => n.categories.includes('國產蔬菜'))
     }
@@ -243,13 +241,13 @@ export default {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 60%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.08) 60%);
 }
 .slide.is-dark::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.15) 60%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 60%);
 }
 .slide-content {
   position: relative;
@@ -259,26 +257,26 @@ export default {
 .slide.is-dark  .slide-content { color: #161619; }
 .slide-badge {
   display: block;
-  font-size: 14px;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
   font-weight: 400;
 }
-.slide.is-light .slide-badge { color: rgba(255,255,255,0.85); }
-.slide.is-dark  .slide-badge { color: #161619; }
 .slide-title {
-  font-size: clamp(48px, 8vw, 90px);
+  font-size: clamp(52px, 8vw, 90px);
   font-weight: 500;
   line-height: 1.1;
   margin: 0 0 8px;
 }
 .slide-sub {
+  display: block;
   font-size: 18px;
   letter-spacing: 10px;
-  margin: 0;
   font-weight: 400;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 6px;
+  display: inline-block;
 }
-.slide.is-dark .slide-sub { letter-spacing: 5px; }
 .slide-dots {
   position: absolute;
   bottom: 40px;
@@ -290,16 +288,20 @@ export default {
 .slide-dots button {
   width: 8px; height: 8px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 1px solid rgba(255,255,255,0.7);
   background: transparent;
   cursor: pointer;
   padding: 0;
   transition: background 0.2s;
+  box-shadow: inset 0 0 0 0 #fff;
 }
-.slide-dots button.active { background: #fff; }
+.slide-dots button.active {
+  box-shadow: inset 0 0 0 8px #fff;
+  border-color: #fff;
+}
 .scroll-hint {
   position: absolute;
-  bottom: 24px;
+  bottom: 36px;
   right: 40px;
   color: #161619;
   font-size: 11px;
@@ -318,125 +320,166 @@ export default {
   50% { transform: translateY(6px); }
 }
 
-/* ── Category Banners ─────────────────────────────────── */
-.cat-banners {
+/* ── Category Banners (matching konte-category-banner CSS) ── */
+.cat-section {
   display: flex;
   background: #fff;
 }
 .cat-col {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  padding: 0 25px;
 }
-.cat-item {
-  display: block;
+.cat-col-left  { padding-left: 60px; }
+.cat-col-right { padding-right: 60px; }
+
+/* Matches original: .konte-category-banner */
+.konte-category-banner {
+  margin-bottom: 30px;
+}
+.konte-category-banner__link {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
   text-decoration: none;
   color: inherit;
-  border-bottom: 1px solid #f0f0f0;
 }
-.cat-item:last-child { border-bottom: none; }
-.cat-img-wrap {
+/* Rotated label - align-left */
+.konte-category-banner.align-left .konte-category-banner__category {
+  transform: translateX(-100%) rotate(-90deg);
+  transform-origin: top right;
+  left: -55px;
+}
+/* Rotated label - align-right */
+.konte-category-banner.align-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.konte-category-banner.align-right .konte-category-banner__category {
+  transform: rotate(-90deg);
+  transform-origin: top right;
+  right: -35px;
+}
+.konte-category-banner__category {
+  font-size: 14px;
+  line-height: 1;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  color: #888;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.konte-category-banner__image {
+  display: block;
+  position: relative;
   overflow: hidden;
 }
-.cat-img-wrap img {
+.konte-category-banner__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s;
+}
+.konte-category-banner__link:hover .konte-category-banner__image img {
+  transform: scale(1.04);
+}
+.konte-category-banner__content {
+  display: block;
+}
+.konte-category-banner__title {
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 20px 0 14px 0;
+  color: #222;
+}
+.konte-category-banner__button {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 4px;
+  font-size: 14px;
+  color: #555;
+}
+.konte-category-banner__button::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  border-bottom: 1.5px solid #555;
+  transition: width 0.4s;
+}
+.konte-category-banner__link:hover .konte-category-banner__button::after {
+  width: 100%;
+}
+
+/* ── Company ──────────────────────────────────────────── */
+.company-section {
+  background: #f7f7f7;
+  padding: 60px 5%;
+}
+.company-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  gap: 48px;
+  align-items: center;
+}
+.company-text-block h2 {
+  font-size: 22px;
+  font-weight: 500;
+  color: #222;
+  margin: 0 0 8px;
+}
+.company-text-block p {
+  font-size: 15px;
+  color: #888;
+  margin: 0 0 14px;
+}
+.addr-link {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #555;
+  text-decoration: underline;
+}
+.company-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.company-images a { display: block; overflow: hidden; }
+.company-images img {
   width: 100%;
   height: 220px;
   object-fit: cover;
   display: block;
   transition: transform 0.4s;
 }
-.cat-item:hover .cat-img-wrap img { transform: scale(1.04); }
-.cat-info {
-  padding: 16px 20px 20px;
-}
-.cat-label {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: #aaa;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 6px;
-}
-.cat-title {
-  font-size: 17px;
-  font-weight: 600;
-  color: #222;
-  margin: 0 0 6px;
-}
-.cat-desc {
-  font-size: 13px;
-  color: #777;
-  margin: 0;
-  line-height: 1.6;
-}
+.company-images a:hover img { transform: scale(1.03); }
 
-/* ── Company ──────────────────────────────────────────── */
-.company-section {
-  background: #f8f8f6;
-  padding: 56px 5%;
-}
-.company-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 48px;
-  align-items: center;
-}
-.company-text h2 {
-  font-size: 26px;
-  font-weight: 600;
-  color: #222;
-  margin: 0 0 10px;
-}
-.company-text p {
-  font-size: 15px;
-  color: #777;
-  margin: 0 0 14px;
-}
-.company-addr {
-  font-size: 12px;
-  letter-spacing: 3px;
-  color: #555;
-  text-transform: lowercase;
-  text-decoration: underline;
-}
-.company-images {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.company-img-link { display: block; overflow: hidden; }
-.company-img-link img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s;
-}
-.company-img-link:hover img { transform: scale(1.03); }
-
-/* ── Post Grid ────────────────────────────────────────── */
+/* ── Post Grid (matches konte-post-grid columns-3 columns-gap-40) ── */
 .post-section {
-  padding: 56px 5% 64px;
+  padding: 60px 25px;
   background: #fff;
 }
-.post-section-header {
-  max-width: 1200px;
+.post-section-head {
+  max-width: 1400px;
   margin: 0 auto 36px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   border-bottom: 1px solid #ebebeb;
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
-.post-section-header h2 {
+.post-head-left h2 {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   color: #222;
   margin: 0 0 4px;
 }
-.post-section-header p {
+.post-head-left p {
   font-size: 14px;
   color: #888;
   margin: 0;
@@ -449,99 +492,89 @@ export default {
   text-decoration: none;
   border-bottom: 1px solid currentColor;
 }
-.post-grid {
-  max-width: 1200px;
+/* Matches .konte-post-grid.columns-3.columns-gap-40 */
+.konte-post-grid {
+  max-width: 1400px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
 }
-.post-card { display: flex; flex-direction: column; }
-.post-thumb {
+.konte-post-grid--elementor {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -40px;
+  margin-right: -40px;
+}
+.konte-post-grid--elementor .hentry {
+  width: calc(100% / 3);
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-bottom: 40px;
+}
+.post-thumbnail {
   display: block;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
-.post-thumb img {
+.post-thumbnail img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: auto;
   display: block;
   transition: transform 0.4s;
 }
-.post-card:hover .post-thumb img { transform: scale(1.04); }
+.post-thumbnail:hover img { transform: scale(1.04); }
 .post-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 0 10px;
-  line-height: 1.5;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 5px;
+  line-height: 1.4;
 }
 .post-title a {
   color: #222;
   text-decoration: none;
   transition: color 0.2s;
 }
-.post-title a:hover { color: #555; }
-.post-excerpt {
-  font-size: 13px;
-  color: #888;
-  line-height: 1.75;
-  margin: 0 0 14px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+.post-title a:hover { color: #888; }
+.post-summary {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
-.continue-reading {
-  font-size: 13px;
-  color: #222;
-  border: 1px solid #222;
-  padding: 8px 18px;
+/* Matches .button.alt */
+.button.alt {
   display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 38px;
+  padding: 0 25px;
+  border: 1px solid #222;
+  color: #222;
   text-decoration: none;
+  background: transparent;
   transition: background 0.2s, color 0.2s;
-  align-self: flex-start;
-  margin-top: auto;
 }
-.continue-reading:hover { background: #222; color: #fff; }
+.button.alt:hover { background: #222; color: #fff; }
 
 /* ── Video ────────────────────────────────────────────── */
 .video-section {
-  padding: 56px 5% 64px;
-  background: #f8f8f6;
-}
-.video-section-header {
-  max-width: 1200px;
-  margin: 0 auto 32px;
-}
-.video-section-header h2 {
-  font-size: 22px;
-  font-weight: 600;
-  color: #222;
-  margin: 0 0 4px;
-}
-.video-section-header p {
-  font-size: 14px;
-  color: #888;
-  margin: 0;
-}
-.video-grid {
-  max-width: 1200px;
+  padding: 60px 25px;
+  background: #f7f7f7;
+  max-width: 1400px;
   margin: 0 auto;
+}
+.video-head { margin-bottom: 28px; }
+.video-head h2 { font-size: 22px; font-weight: 500; color: #444; margin: 0 0 4px; }
+.video-head p { font-size: 15px; color: #888; letter-spacing: 3px; margin: 0; }
+.video-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
 }
-.video-item p {
-  font-size: 13px;
-  color: #666;
-  margin: 12px 0 0;
-  line-height: 1.6;
-}
-.video-wrap {
-  position: relative;
-  aspect-ratio: 16 / 9;
-}
+.video-wrap { position: relative; aspect-ratio: 16 / 9; }
 .video-wrap iframe {
   position: absolute;
   inset: 0;
@@ -549,31 +582,28 @@ export default {
   height: 100%;
   border: none;
 }
+.video-item p {
+  font-size: 14px;
+  color: #666;
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
 
 /* ── Partner ──────────────────────────────────────────── */
 .partner-section {
-  padding: 56px 5%;
+  padding: 60px 5%;
   background: #fff;
 }
 .partner-inner {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 48px;
   align-items: center;
 }
-.partner-text h2 {
-  font-size: 22px;
-  font-weight: 600;
-  color: #222;
-  margin: 0 0 8px;
-}
-.partner-text p {
-  font-size: 14px;
-  color: #888;
-  margin: 0;
-}
+.partner-text h2 { font-size: 22px; font-weight: 500; color: #222; margin: 0 0 8px; }
+.partner-text p  { font-size: 14px; color: #888; margin: 0; }
 .partner-imgs {
   display: flex;
   gap: 16px;
@@ -581,7 +611,7 @@ export default {
 }
 .partner-imgs img {
   flex: 1;
-  width: 0;
+  min-width: 0;
   height: auto;
   object-fit: cover;
   border-radius: 4px;
@@ -589,18 +619,16 @@ export default {
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .post-grid { grid-template-columns: repeat(2, 1fr); }
+  .konte-post-grid--elementor .hentry { width: 50%; }
 }
 @media (max-width: 768px) {
-  .cat-banners { flex-direction: column; }
-  .cat-img-wrap img { height: 180px; }
+  .cat-section { flex-direction: column; }
+  .cat-col { padding: 0 20px; }
   .company-inner { grid-template-columns: 1fr; }
   .company-images { grid-template-columns: 1fr; }
-  .post-grid { grid-template-columns: 1fr; }
+  .konte-post-grid--elementor .hentry { width: 100%; }
   .video-grid { grid-template-columns: 1fr; }
   .partner-inner { grid-template-columns: 1fr; }
   .partner-imgs { flex-wrap: wrap; }
-  .partner-imgs img { width: 30%; flex: none; }
-  .slide-sub { letter-spacing: 3px; }
 }
 </style>
