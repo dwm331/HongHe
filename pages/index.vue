@@ -41,7 +41,7 @@
           :key="item.name"
           class="konte-category-banner align-left title-bottom"
         >
-          <nuxt-link :to="item.link" class="konte-category-banner__link">
+          <div class="konte-category-banner__link">
             <span class="konte-category-banner__category">{{ item.label }}</span>
             <span class="konte-category-banner__image">
               <img :src="$imgPath(item.img)" :alt="item.name" />
@@ -50,7 +50,7 @@
               <h4 class="konte-category-banner__title">{{ item.name }}</h4>
               <span class="konte-category-banner__button">{{ item.desc }}</span>
             </span>
-          </nuxt-link>
+          </div>
         </div>
       </div>
       <div class="cat-col cat-col-right">
@@ -59,7 +59,7 @@
           :key="item.name"
           class="konte-category-banner align-right title-bottom"
         >
-          <nuxt-link :to="item.link" class="konte-category-banner__link">
+          <div class="konte-category-banner__link">
             <span class="konte-category-banner__category">{{ item.label }}</span>
             <span class="konte-category-banner__image">
               <img :src="$imgPath(item.img)" :alt="item.name" />
@@ -68,7 +68,7 @@
               <h4 class="konte-category-banner__title">{{ item.name }}</h4>
               <span class="konte-category-banner__button">{{ item.desc }}</span>
             </span>
-          </nuxt-link>
+          </div>
         </div>
       </div>
     </section>
@@ -378,10 +378,6 @@ export default {
   display: block;
   width: 100%;
   height: auto;
-  transition: transform 0.4s;
-}
-.konte-category-banner__link:hover .konte-category-banner__image img {
-  transform: scale(1.04);
 }
 .konte-category-banner__content {
   display: block;
@@ -409,9 +405,6 @@ export default {
   width: 20px;
   border-bottom: 1.5px solid #555;
   transition: width 0.4s;
-}
-.konte-category-banner__link:hover .konte-category-banner__button::after {
-  width: 100%;
 }
 
 /* ── Company ──────────────────────────────────────────── */
