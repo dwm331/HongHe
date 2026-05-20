@@ -3,146 +3,167 @@
     <Header />
 
     <!-- ─── Hero Slider ────────────────────────────────────────── -->
-    <section id="hero" class="hero">
+    <section class="hero">
       <div class="slides-container">
         <div
           v-for="(slide, i) in slides"
           :key="i"
           class="slide"
-          :class="{ 'is-active': activeSlide === i }"
-          :style="{ backgroundImage: `url(${$imgPath('main_bg.jpg')})` }"
+          :class="['is-' + slide.theme, { 'is-active': activeSlide === i }]"
+          :style="{ backgroundImage: `url(${$imgPath(slide.bg)})` }"
         >
           <div class="slide-content">
             <span class="slide-badge">I believe! I honghe!</span>
             <h1 class="slide-title">{{ slide.title }}</h1>
-            <p class="slide-desc">{{ slide.desc }}</p>
-            <a class="hero-btn" href="#products">探索產品</a>
+            <p class="slide-sub">{{ slide.sub }}</p>
           </div>
         </div>
       </div>
-
       <div class="slide-dots">
         <button
           v-for="(_, i) in slides"
           :key="i"
           :class="{ active: activeSlide === i }"
           @click="goSlide(i)"
-          :aria-label="`Slide ${i + 1}`"
         ></button>
       </div>
-
       <div class="scroll-hint">
         <span>SCROLL DOWN</span>
         <div class="scroll-arrow">↓</div>
       </div>
     </section>
 
-    <!-- ─── Features ──────────────────────────────────────────── -->
-    <section class="features">
-      <div class="features-inner">
-        <div v-for="f in features" :key="f.title" class="feature-card">
-          <img :src="`${$imgPath('icon/' + f.icon)}`" :alt="f.title" class="feature-icon" />
-          <h3>{{ f.title }}</h3>
-          <p>{{ f.desc }}</p>
-        </div>
+    <!-- ─── Category Banners ───────────────────────────────────── -->
+    <section class="cat-banners">
+      <div class="cat-col cat-col-left">
+        <nuxt-link
+          v-for="item in catLeft"
+          :key="item.name"
+          :to="item.link"
+          class="cat-item"
+        >
+          <div class="cat-img-wrap">
+            <img :src="$imgPath(item.img)" :alt="item.name" />
+          </div>
+          <div class="cat-info">
+            <span class="cat-label">{{ item.label }}</span>
+            <h4 class="cat-title">{{ item.name }}</h4>
+            <p class="cat-desc">{{ item.desc }}</p>
+          </div>
+        </nuxt-link>
+      </div>
+      <div class="cat-col cat-col-right">
+        <nuxt-link
+          v-for="item in catRight"
+          :key="item.name"
+          :to="item.link"
+          class="cat-item"
+        >
+          <div class="cat-img-wrap">
+            <img :src="$imgPath(item.img)" :alt="item.name" />
+          </div>
+          <div class="cat-info">
+            <span class="cat-label">{{ item.label }}</span>
+            <h4 class="cat-title">{{ item.name }}</h4>
+            <p class="cat-desc">{{ item.desc }}</p>
+          </div>
+        </nuxt-link>
       </div>
     </section>
 
-    <!-- ─── Brand Story ─────────────────────────────────────── -->
-    <section id="brand" class="about">
-      <div class="about-inner">
-        <div class="about-image">
-          <img src="~/static/img/main.jpeg" alt="浤賀有限公司" />
-        </div>
-        <div class="about-text">
-          <span class="sec-tag">ABOUT US</span>
-          <h2>關於我們</h2>
-          <div class="divider"></div>
-          <p>成立於2018年，位於雲林縣的浤賀有限公司，是雲林縣最大蔬菜貿易公司之一，主要從事蔬果進口與批售業務。</p>
-          <p>商品涵蓋大白菜、白蘿蔔、高麗菜、青花菜、美生菜、南瓜等多種蔬果，主要銷售通路包含果菜市場及餐廳食材。</p>
-          <p class="about-address">📍 雲林縣虎尾鎮文科路1342號</p>
+    <!-- ─── 公司資訊 ────────────────────────────────────────────── -->
+    <section class="company-section">
+      <div class="company-inner">
+        <div class="company-text">
+          <h2>公司資訊</h2>
+          <p>歡迎蒞臨，邀您指導</p>
           <a
-            class="outline-btn"
-            href="https://www.facebook.com/%E6%B5%A4%E8%B3%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-196766557402879/"
+            class="company-addr"
+            href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9"
             target="_blank" rel="noopener"
-          >FB 粉絲專頁 →</a>
+          >our address</a>
+        </div>
+        <div class="company-images">
+          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener" class="company-img-link">
+            <img :src="$imgPath('company-1.jpg')" alt="公司位置" />
+          </a>
+          <a href="https://maps.app.goo.gl/kyTFXBpmcHZntvRQ9" target="_blank" rel="noopener" class="company-img-link">
+            <img :src="$imgPath('company-map.jpg')" alt="地圖" />
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- ─── Products ───────────────────────────────────────── -->
-    <section id="products" class="products">
-      <div class="sec-header">
-        <span class="sec-tag">PRODUCTS</span>
-        <h2>產品介紹</h2>
-        <p>來自大地的鮮蔬，嚴選品質，新鮮直送</p>
+    <!-- ─── 產品介紹 post grid ──────────────────────────────────── -->
+    <section class="post-section">
+      <div class="post-section-header">
+        <div>
+          <h2>產品介紹</h2>
+          <p>來自大地的鮮蔬</p>
+        </div>
+        <nuxt-link to="/products/domestic" class="our-blog-link">OUR BLOG</nuxt-link>
       </div>
-      <div class="products-grid">
-        <div v-for="p in products" :key="p.name" class="product-card">
-          <div
-            class="product-thumb"
-            :style="{ backgroundImage: `url(${$imgPath(p.img)})` }"
-          ></div>
-          <div class="product-info">
-            <h3>{{ p.name }}</h3>
-            <p>{{ p.desc }}</p>
+      <div class="post-grid">
+        <div v-for="p in posts" :key="p.slug" class="post-card">
+          <nuxt-link :to="`/news/${p.slug}`" class="post-thumb">
+            <img :src="$imgPath(p.img)" :alt="p.title" />
+          </nuxt-link>
+          <div class="post-summary">
+            <h5 class="post-title">
+              <nuxt-link :to="`/news/${p.slug}`">{{ p.title }}</nuxt-link>
+            </h5>
+            <p class="post-excerpt">{{ p.excerpt }}</p>
+            <nuxt-link :to="`/news/${p.slug}`" class="continue-reading">Continue reading</nuxt-link>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── News / Blog ─────────────────────────────────────── -->
-    <section id="news" class="news">
-      <div class="sec-header">
-        <span class="sec-tag">NEWS</span>
-        <h2>來自大地的鮮蔬</h2>
-        <p>分享蔬果健康知識，讓您更了解每一口食材</p>
-      </div>
-      <div class="news-grid">
-        <div v-for="n in news" :key="n.title" class="news-card">
-          <div
-            class="news-thumb"
-            :style="{ backgroundImage: `url(${$imgPath(n.img)})` }"
-          ></div>
-          <div class="news-body">
-            <h3>{{ n.title }}</h3>
-            <p>{{ n.excerpt }}</p>
-            <span class="read-more">繼續閱讀 →</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── Videos ──────────────────────────────────────────── -->
-    <section class="videos">
-      <div class="sec-header">
-        <span class="sec-tag">HEALTH</span>
-        <h2>與你分享健康小知識</h2>
+    <!-- ─── 影音專區 ────────────────────────────────────────────── -->
+    <section class="video-section">
+      <div class="video-section-header">
+        <h2>影音專區</h2>
+        <p>與你分享健康小知識</p>
       </div>
       <div class="video-grid">
-        <div v-for="v in videos" :key="v.title" class="video-wrap">
-          <div class="video-placeholder">
-            <img :src="$imgPath(v.img)" :alt="v.title" class="video-poster" />
-            <div class="play-circle">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            </div>
-            <p class="video-title">{{ v.title }}</p>
+        <div class="video-item">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/0Rl1tpOEwn4?controls=1&rel=0"
+              frameborder="0"
+              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              title="越吃越凍齡"
+            ></iframe>
           </div>
+          <p>越吃越凍齡！青花菜、洋蔥、大蒜、菠菜等蔬菜，讓你年輕10歲!</p>
+        </div>
+        <div class="video-item">
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/HEgcOPW45ZQ?controls=1&rel=0"
+              frameborder="0"
+              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              title="蔬果如何洗"
+            ></iframe>
+          </div>
+          <p>蔬果如何洗? 教你洗出不殘留農藥的健康好蔬果</p>
         </div>
       </div>
     </section>
 
-    <!-- ─── Partners ────────────────────────────────────────── -->
-    <section class="partners">
-      <div class="sec-header">
-        <h2>合作品牌</h2>
-      </div>
-      <div class="partners-row">
-        <div v-for="p in partners" :key="p.name" class="partner-item">
-          <img :src="$imgPath(p.img)" :alt="p.name" />
-          <span>{{ p.name }}</span>
+    <!-- ─── 合作品牌 ─────────────────────────────────────────────── -->
+    <section class="partner-section">
+      <div class="partner-inner">
+        <div class="partner-text">
+          <h2>合作品牌</h2>
+          <p>歡迎與我們合作</p>
+        </div>
+        <div class="partner-imgs">
+          <img :src="$imgPath('partner1.jpg')" alt="合作品牌1" />
+          <img :src="$imgPath('partner2.jpeg')" alt="合作品牌2" />
+          <img :src="$imgPath('partner3.jpg')" alt="合作品牌3" />
         </div>
       </div>
     </section>
@@ -153,102 +174,36 @@
 </template>
 
 <script>
+import allNews from '~/assets/data/news.js'
+
 export default {
   data () {
     return {
       activeSlide: 0,
       timer: null,
       slides: [
-        {
-          title: '每一步 都是邁向健康的一步',
-          desc: '嚴選優質蔬果，從產地直送到您的餐桌'
-        },
-        {
-          title: '美好生活 從均衡飲食開始',
-          desc: '浤賀蔬果，讓每一餐都充滿營養與美味'
-        },
-        {
-          title: '自然鮮蔬 一份蔬菜，一份健康',
-          desc: '蔬果批發・進口，品質保證，新鮮到府'
-        }
+        { bg: 'banner-slide1.jpg', theme: 'light', title: '每一步', sub: '都是邁向健康的一步' },
+        { bg: 'banner-slide2.jpg', theme: 'dark',  title: '美好生活', sub: '從均衡飲食開始' },
+        { bg: 'products-banner.jpg', theme: 'light', title: '自然鮮蔬', sub: '一份蔬菜，一份健康' }
       ],
-      features: [
-        {
-          icon: 'icon1.png',
-          title: '國際貿易',
-          desc: '與多個國家優質蔬果供應商合作，提供最新鮮的進口蔬果'
-        },
-        {
-          icon: 'icon2.png',
-          title: '信用交易',
-          desc: '長期建立的商業信譽，與客戶維持穩定可靠的合作關係'
-        },
-        {
-          icon: 'icon3.png',
-          title: '高品質',
-          desc: '嚴格把關蔬果品質，確保每一批貨物都達到最高標準'
-        }
+      catLeft: [
+        { img: 'cat-broccoli.jpg', name: '新鮮青花菜', desc: '富含維生素K，骨骼堅固，活力無限', label: 'See Our News', link: '/news/brand-story' },
+        { img: 'cat-cabbage.jpg',  name: '純淨高麗菜', desc: '清爽健康，營養均衡，全家人喜歡吃', label: 'Explore Now', link: '/products/domestic' },
+        { img: 'cat-potato2.jpg', name: '馬鈴薯', desc: '減脂、防癌、穩定血糖與調整血壓好幫手', label: 'See Our News', link: '/news/potato-healthy-cheap' },
+        { img: 'cat-onion.jpg',   name: '洋蔥', desc: '營養豐富，抗氧化，健康生活有保障', label: 'Explore Now', link: '/news/onion-nutrition-antioxidant' }
       ],
-      products: [
-        { name: '新鮮青花菜', desc: '富含維生素K，有益骨骼健康', img: 'v4_1.jpeg' },
-        { name: '純淨高麗菜', desc: '均衡的營養素，適合各式料理', img: 'v3_1.jpeg' },
-        { name: '馬鈴薯', desc: '低脂肪，有助於控制血糖與體重', img: 'v7_1.jpeg' },
-        { name: '洋蔥', desc: '富含抗氧化物質，護心抗老', img: 'v5_1.jpeg' },
-        { name: '韓流大白菜', desc: '豐富維生素，促進消化健康', img: 'v1_1.jpeg' },
-        { name: '蘿蔔大長腿', desc: '改善血液循環，消暑解熱', img: 'v2_1.jpeg' },
-        { name: '美生菜', desc: '高纖維蔬菜，助消化促代謝', img: 'v5_1.jpeg' },
-        { name: '蘿蔓心', desc: '有益心臟健康的優質蔬菜', img: 'v6_1.jpeg' },
-        { name: '大蒜', desc: '天然抗菌，預防感冒強身', img: 'v7_1.jpeg' }
+      catRight: [
+        { img: 'cat-napa.jpg',    name: '韓流大白菜', desc: '營養多多，消化好，身心健康不煩惱', label: 'Explore Now', link: '/news/korean-napa-cabbage' },
+        { img: 'cat-radish.jpg',  name: '蘿蔔大長腿', desc: '營養豐富，血液暢通，健康有保障', label: 'See Our News', link: '/products/domestic' },
+        { img: 'cat-lettuce.jpg', name: '萵苣', desc: '脆爽多汁，纖維豐富，身心健康好選擇', label: 'Explore Now', link: '/products/domestic' },
+        { img: 'cat-romaine.jpg', name: '蘿蔓心', desc: '脆甜可口，纖維豐富，心臟健康保駕護航', label: 'Explore Now', link: '/products/domestic' },
+        { img: 'cat-garlic.jpg',  name: '大蒜', desc: '抗菌防感冒，健康生活無憂慮', label: 'Explore Now', link: '/news/garlic-antibacterial' }
       ],
-      news: [
-        {
-          title: '跨越千里的故事',
-          excerpt: '創辦人周冠誠的品牌故事，從雲林出發，走向國際蔬果貿易市場...',
-          img: 'v4_1.jpeg'
-        },
-        {
-          title: '大蒜－抗菌防感冒',
-          excerpt: '大蒜含有天然抗菌成分，日常食用有效提升免疫力，遠離感冒困擾...',
-          img: 'v7_1.jpeg'
-        },
-        {
-          title: '洋蔥－營養豐富、抗氧化',
-          excerpt: '洋蔥富含多種抗氧化物質，研究顯示每日攝取有助於延緩老化...',
-          img: 'v5_1.jpeg'
-        },
-        {
-          title: '大白菜－豐富維生素',
-          excerpt: '冬季必備的大白菜，含豐富維生素C及膳食纖維，低卡路里好選擇...',
-          img: 'v1_1.jpeg'
-        },
-        {
-          title: '韓流大白菜－營養多，消化好',
-          excerpt: '韓國進口大白菜口感爽脆，富含膳食纖維，幫助腸胃蠕動消化順暢...',
-          img: 'v1_1.jpeg'
-        },
-        {
-          title: '馬鈴薯－便宜又好吃',
-          excerpt: '馬鈴薯是全方位健康食材，富含鉀、B6等營養素，飽足感強熱量適中...',
-          img: 'v7_1.jpeg'
-        }
-      ],
-      videos: [
-        { title: '蔬果健康小知識', img: 'v4_1.jpeg' },
-        { title: '蔬果清洗小技巧', img: 'v1_1.jpeg' }
-      ],
-      partners: [
-        { name: '廉使蔬果生產合作社', img: 'partner1.jpg' },
-        { name: '優質蔬果供應商', img: 'partner2.jpeg' },
-        { name: '農產品貿易夥伴', img: 'partner3.jpg' }
-      ]
+      posts: allNews.filter(n => n.categories.includes('國產蔬菜'))
     }
   },
-  mounted () {
-    this.startTimer()
-  },
-  beforeDestroy () {
-    clearInterval(this.timer)
-  },
+  mounted () { this.startTimer() },
+  beforeDestroy () { clearInterval(this.timer) },
   methods: {
     startTimer () {
       this.timer = setInterval(() => {
@@ -265,140 +220,93 @@ export default {
 </script>
 
 <style>
-/* ── Shared section header ─────────────────────────────── */
-.sec-header {
-  text-align: center;
-  padding: 64px 24px 48px;
-}
-.sec-header .sec-tag {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: #2d6a2d;
-  margin-bottom: 12px;
-}
-.sec-header h2 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 12px;
-}
-.sec-header p {
-  font-size: 16px;
-  color: #777;
-  margin: 0;
-}
-
 /* ── Hero ─────────────────────────────────────────────── */
 .hero {
   position: relative;
   height: 100vh;
   min-height: 560px;
   overflow: hidden;
-  background: #111;
 }
-.slides-container {
-  position: absolute;
-  inset: 0;
-}
+.slides-container { position: absolute; inset: 0; }
 .slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  display: flex;
-  align-items: center;
   opacity: 0;
   transition: opacity 0.9s ease;
+  display: flex;
+  align-items: center;
 }
 .slide.is-active { opacity: 1; }
-.slide::before {
+.slide.is-light::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 65%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 60%);
+}
+.slide.is-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.15) 60%);
 }
 .slide-content {
   position: relative;
-  padding: 0 10%;
-  max-width: 700px;
-  color: #fff;
+  padding: 0 8%;
 }
+.slide.is-light .slide-content { color: #fff; }
+.slide.is-dark  .slide-content { color: #161619; }
 .slide-badge {
   display: block;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 4px;
-  color: #7fc97a;
-  margin-bottom: 20px;
-}
-.slide-title {
-  font-size: clamp(28px, 5vw, 52px);
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 14px;
+  letter-spacing: 2px;
   margin-bottom: 16px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-weight: 400;
 }
-.slide-desc {
+.slide.is-light .slide-badge { color: rgba(255,255,255,0.85); }
+.slide.is-dark  .slide-badge { color: #161619; }
+.slide-title {
+  font-size: clamp(48px, 8vw, 90px);
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0 0 8px;
+}
+.slide-sub {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 36px;
-  line-height: 1.7;
+  letter-spacing: 10px;
+  margin: 0;
+  font-weight: 400;
 }
-.hero-btn {
-  display: inline-block;
-  padding: 14px 36px;
-  background: #2d6a2d;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 4px;
-  letter-spacing: 1px;
-  transition: background 0.2s, transform 0.2s;
-}
-.hero-btn:hover {
-  background: #235523;
-  transform: translateY(-2px);
-}
-
-/* Dots */
+.slide.is-dark .slide-sub { letter-spacing: 5px; }
 .slide-dots {
   position: absolute;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 40px;
+  left: 8%;
   display: flex;
-  gap: 10px;
+  gap: 25px;
   z-index: 10;
 }
 .slide-dots button {
-  width: 10px;
-  height: 10px;
+  width: 8px; height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.45);
-  border: none;
+  border: 1px solid #fff;
+  background: transparent;
   cursor: pointer;
   padding: 0;
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.2s;
 }
-.slide-dots button.active {
-  background: #fff;
-  transform: scale(1.35);
-}
-
-/* Scroll hint */
+.slide-dots button.active { background: #fff; }
 .scroll-hint {
   position: absolute;
   bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 10px;
-  letter-spacing: 3px;
+  right: 40px;
+  color: #161619;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
   text-align: center;
   z-index: 10;
-  pointer-events: none;
 }
 .scroll-arrow {
   font-size: 18px;
@@ -407,333 +315,292 @@ export default {
 }
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(7px); }
+  50% { transform: translateY(6px); }
 }
 
-/* ── Features ─────────────────────────────────────────── */
-.features {
-  padding: 0 5%;
-  background: #fff;
-}
-.features-inner {
+/* ── Category Banners ─────────────────────────────────── */
+.cat-banners {
   display: flex;
-  gap: 32px;
-  justify-content: center;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 64px 0;
-}
-.feature-card {
-  flex: 1;
-  max-width: 320px;
-  text-align: center;
-  padding: 40px 32px;
-  border-radius: 12px;
   background: #fff;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
-  transition: transform 0.25s, box-shadow 0.25s;
 }
-.feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.11);
+.cat-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
-.feature-icon {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 18px;
+.cat-item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid #f0f0f0;
 }
-.feature-card h3 {
-  font-size: 18px;
+.cat-item:last-child { border-bottom: none; }
+.cat-img-wrap {
+  overflow: hidden;
+}
+.cat-img-wrap img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s;
+}
+.cat-item:hover .cat-img-wrap img { transform: scale(1.04); }
+.cat-info {
+  padding: 16px 20px 20px;
+}
+.cat-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #aaa;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+.cat-title {
+  font-size: 17px;
   font-weight: 600;
-  color: #2d6a2d;
-  margin-bottom: 12px;
+  color: #222;
+  margin: 0 0 6px;
 }
-.feature-card p {
-  font-size: 14px;
+.cat-desc {
+  font-size: 13px;
   color: #777;
-  line-height: 1.75;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Company ──────────────────────────────────────────── */
+.company-section {
+  background: #f8f8f6;
+  padding: 56px 5%;
+}
+.company-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  align-items: center;
+}
+.company-text h2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 10px;
+}
+.company-text p {
+  font-size: 15px;
+  color: #777;
+  margin: 0 0 14px;
+}
+.company-addr {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #555;
+  text-transform: lowercase;
+  text-decoration: underline;
+}
+.company-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.company-img-link { display: block; overflow: hidden; }
+.company-img-link img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s;
+}
+.company-img-link:hover img { transform: scale(1.03); }
+
+/* ── Post Grid ────────────────────────────────────────── */
+.post-section {
+  padding: 56px 5% 64px;
+  background: #fff;
+}
+.post-section-header {
+  max-width: 1200px;
+  margin: 0 auto 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 20px;
+}
+.post-section-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 4px;
+}
+.post-section-header p {
+  font-size: 14px;
+  color: #888;
   margin: 0;
 }
-
-/* ── About ────────────────────────────────────────────── */
-.about { background: #f8faf8; }
-.about-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 80px 5%;
-  display: flex;
-  align-items: center;
-  gap: 64px;
-}
-.about-image {
-  flex: 1;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
-}
-.about-image img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-}
-.about-text { flex: 1; }
-.about-text .sec-tag {
-  display: block;
+.our-blog-link {
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: #2d6a2d;
-  margin-bottom: 12px;
+  letter-spacing: 3px;
+  color: #555;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
 }
-.about-text h2 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #222;
+.post-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.post-card { display: flex; flex-direction: column; }
+.post-thumb {
+  display: block;
+  overflow: hidden;
   margin-bottom: 16px;
 }
-.divider {
-  width: 48px;
-  height: 3px;
-  background: #2d6a2d;
-  margin-bottom: 24px;
-  border-radius: 2px;
-}
-.about-text p {
-  font-size: 16px;
-  color: #555;
-  line-height: 1.85;
-  margin-bottom: 12px;
-}
-.about-address {
-  color: #2d6a2d !important;
-  font-weight: 500 !important;
-}
-.outline-btn {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 12px 28px;
-  border: 2px solid #2d6a2d;
-  color: #2d6a2d;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 4px;
-  transition: background 0.2s, color 0.2s;
-}
-.outline-btn:hover {
-  background: #2d6a2d;
-  color: #fff;
-}
-
-/* ── Products ─────────────────────────────────────────── */
-.products { padding-bottom: 80px; background: #fff; }
-.products-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 5%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.product-card {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
-  transition: transform 0.25s, box-shadow 0.25s;
-  cursor: pointer;
-}
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.13);
-}
-.product-thumb {
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-}
-.product-info { padding: 20px 24px; }
-.product-info h3 {
-  font-size: 17px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 8px;
-}
-.product-info p {
-  font-size: 13px;
-  color: #888;
-  margin: 0;
-  line-height: 1.65;
-}
-
-/* ── News ─────────────────────────────────────────────── */
-.news { background: #f8faf8; padding-bottom: 80px; }
-.news-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 5%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.news-card {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
-  transition: transform 0.25s;
-  cursor: pointer;
-}
-.news-card:hover { transform: translateY(-5px); }
-.news-thumb {
+.post-thumb img {
+  width: 100%;
   height: 180px;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s;
 }
-.news-body { padding: 20px 24px; }
-.news-body h3 {
+.post-card:hover .post-thumb img { transform: scale(1.04); }
+.post-title {
   font-size: 16px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 8px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  line-height: 1.5;
 }
-.news-body p {
+.post-title a {
+  color: #222;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.post-title a:hover { color: #555; }
+.post-excerpt {
   font-size: 13px;
   color: #888;
   line-height: 1.75;
-  margin-bottom: 12px;
+  margin: 0 0 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.read-more {
+.continue-reading {
   font-size: 13px;
-  color: #2d6a2d;
-  font-weight: 600;
+  color: #222;
+  border: 1px solid #222;
+  padding: 8px 18px;
+  display: inline-block;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  align-self: flex-start;
+  margin-top: auto;
 }
+.continue-reading:hover { background: #222; color: #fff; }
 
-/* ── Videos ───────────────────────────────────────────── */
-.videos { background: #fff; padding-bottom: 80px; }
+/* ── Video ────────────────────────────────────────────── */
+.video-section {
+  padding: 56px 5% 64px;
+  background: #f8f8f6;
+}
+.video-section-header {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+}
+.video-section-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 4px;
+}
+.video-section-header p {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
 .video-grid {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 5%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
 }
-.video-wrap { border-radius: 12px; overflow: hidden; }
-.video-placeholder {
+.video-item p {
+  font-size: 13px;
+  color: #666;
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
+.video-wrap {
   position: relative;
   aspect-ratio: 16 / 9;
-  overflow: hidden;
-  cursor: pointer;
-  background: #111;
 }
-.video-poster {
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  opacity: 0.6;
-  transition: opacity 0.25s;
-  display: block;
-}
-.video-placeholder:hover .video-poster { opacity: 0.35; }
-.play-circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(45, 106, 45, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s, background 0.2s;
-}
-.video-placeholder:hover .play-circle {
-  transform: translate(-50%, -50%) scale(1.1);
-  background: #2d6a2d;
-}
-.video-title {
-  position: absolute;
-  bottom: 16px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  margin: 0;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  border: none;
 }
 
-/* ── Partners ─────────────────────────────────────────── */
-.partners { background: #f8faf8; padding-bottom: 64px; }
-.partners-row {
-  display: flex;
+/* ── Partner ──────────────────────────────────────────── */
+.partner-section {
+  padding: 56px 5%;
+  background: #fff;
+}
+.partner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: 48px;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  padding: 0 5% 20px;
 }
-.partner-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  color: #666;
+.partner-text h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 8px;
+}
+.partner-text p {
   font-size: 14px;
+  color: #888;
+  margin: 0;
 }
-.partner-item img {
-  width: 160px;
-  height: 160px;
-  border-radius: 12px;
+.partner-imgs {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.partner-imgs img {
+  flex: 1;
+  width: 0;
+  height: auto;
   object-fit: cover;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.partner-item:hover img {
-  transform: scale(1.04);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
 }
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .post-grid { grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (max-width: 768px) {
-  .sec-header { padding: 48px 16px 32px; }
-  .sec-header h2 { font-size: 24px; }
-
-  .slide-content { padding: 0 6%; }
-  .slide-desc { font-size: 15px; }
-
-  .features-inner {
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 16px;
-  }
-  .feature-card { width: 100%; max-width: 100%; }
-
-  .about-inner {
-    flex-direction: column;
-    gap: 32px;
-    padding: 48px 5%;
-  }
-
-  .products-grid { grid-template-columns: 1fr; }
-  .news-grid { grid-template-columns: 1fr; }
+  .cat-banners { flex-direction: column; }
+  .cat-img-wrap img { height: 180px; }
+  .company-inner { grid-template-columns: 1fr; }
+  .company-images { grid-template-columns: 1fr; }
+  .post-grid { grid-template-columns: 1fr; }
   .video-grid { grid-template-columns: 1fr; }
-
-  .partners-row { gap: 32px; }
-}
-
-@media (max-width: 480px) {
-  .slide-title { font-size: 26px; }
-  .hero-btn { padding: 12px 28px; }
-  .about-text h2 { font-size: 24px; }
+  .partner-inner { grid-template-columns: 1fr; }
+  .partner-imgs { flex-wrap: wrap; }
+  .partner-imgs img { width: 30%; flex: none; }
+  .slide-sub { letter-spacing: 3px; }
 }
 </style>
