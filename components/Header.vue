@@ -7,12 +7,12 @@
 
       <nav class="nav" :class="{ 'is-open': menuOpen }">
         <ul class="nav-list">
-          <li><nuxt-link :to="homeHash('brand')" @click.native="close">品牌故事</nuxt-link></li>
+          <li><nuxt-link to="/about" @click.native="close">品牌故事</nuxt-link></li>
           <li class="has-sub">
-            <nuxt-link :to="homeHash('products')">產品介紹</nuxt-link>
+            <nuxt-link to="/products/domestic">產品介紹</nuxt-link>
             <ul class="sub-menu">
-              <li><nuxt-link :to="homeHash('products')" @click.native="close">國產蔬菜</nuxt-link></li>
-              <li><nuxt-link :to="homeHash('products')" @click.native="close">進口蔬菜</nuxt-link></li>
+              <li><nuxt-link to="/products/domestic" @click.native="close">國產蔬菜</nuxt-link></li>
+              <li><nuxt-link to="/products/import" @click.native="close">進口蔬菜</nuxt-link></li>
             </ul>
           </li>
           <li><nuxt-link to="/news" @click.native="close">最新消息</nuxt-link></li>
