@@ -337,9 +337,9 @@ export default {
   margin-bottom: 30px;
 }
 .konte-category-banner__link {
-  display: inline-block;
+  display: block;
   position: relative;
-  max-width: 100%;
+  width: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -350,14 +350,11 @@ export default {
   left: -55px;
 }
 /* Rotated label - align-right */
-.konte-category-banner.align-right {
-  display: flex;
-  justify-content: flex-end;
-}
 .konte-category-banner.align-right .konte-category-banner__category {
   transform: rotate(-90deg);
   transform-origin: top right;
   right: -35px;
+  left: auto;
 }
 .konte-category-banner__category {
   font-size: 14px;
