@@ -7,7 +7,7 @@
 
       <nav class="nav" :class="{ 'is-open': menuOpen }">
         <ul class="nav-list">
-          <li><nuxt-link to="/about" @click.native="close">品牌故事</nuxt-link></li>
+          <li><a href="https://ihonghe.com.tw/about-me/" target="_blank" rel="noopener" @click="close">品牌故事</a></li>
           <li class="has-sub">
             <nuxt-link to="/products/domestic">產品介紹</nuxt-link>
             <ul class="sub-menu">
