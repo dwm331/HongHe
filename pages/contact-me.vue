@@ -89,51 +89,17 @@
           </a>
         </div>
 
-        <!-- Right: Form -->
+        <!-- Right: mailto -->
         <div class="contact-form-wrap">
-          <form v-if="!submitted" class="contact-form" @submit.prevent="handleSubmit">
-            <h2>傳送訊息</h2>
-            <div class="divider"></div>
-
-            <div class="form-group">
-              <label for="cf-name">姓名</label>
-              <input id="cf-name" v-model="form.name" type="text" placeholder="您的姓名" required />
-            </div>
-            <div class="form-group">
-              <label for="cf-email">信箱</label>
-              <input id="cf-email" v-model="form.email" type="email" placeholder="your@email.com" required />
-            </div>
-            <div class="form-group">
-              <label for="cf-subject">主旨</label>
-              <input id="cf-subject" v-model="form.subject" type="text" placeholder="訊息主旨" required />
-            </div>
-            <div class="form-group">
-              <label for="cf-message">內容</label>
-              <textarea
-                id="cf-message"
-                v-model="form.message"
-                rows="6"
-                placeholder="請輸入您想說的話..."
-                required
-              ></textarea>
-            </div>
-
-            <!-- Cloudflare Turnstile widget -->
-            <div id="turnstile-box" class="form-group"></div>
-            <p v-if="captchaError" class="captcha-error">請先完成人機驗證</p>
-
-            <button type="submit" class="submit-btn" :disabled="sending">
-              {{ sending ? '傳送中…' : '傳送訊息' }}
-            </button>
-            <p v-if="sendError" class="send-error">傳送失敗，請稍後再試。</p>
-          </form>
-
-          <div v-else class="thank-you">
-            <div class="check-circle">✓</div>
-            <h3>感謝您的來信！</h3>
-            <p>我們已收到您的訊息，將盡快與您聯繫。</p>
-            <button class="outline-btn" @click="resetForm">再傳一封</button>
-          </div>
+          <h2>傳送訊息</h2>
+          <div class="divider"></div>
+          <p class="mailto-hint">點擊下方按鈕，將開啟您的電子郵件程式直接寄信給我們。</p>
+          <a
+            :href="`mailto:hongheco@gmail.com?subject=${encodeURIComponent('【浤賀官網洽詢】')}`"
+            class="submit-btn mailto-btn"
+          >
+            ✉ 寄信給我們
+          </a>
         </div>
 
       </div>
@@ -144,76 +110,10 @@
 </template>
 
 <script>
-const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'    // ← 填入 web3forms.com 的 access key
-const TURNSTILE_SITEKEY = 'YOUR_TURNSTILE_SITEKEY'   // ← 填入 Cloudflare Turnstile 的 site key
-
 export default {
   head () {
     return {
-      title: '聯絡我們 | HongHe – 浤賀有限公司 x 廉使蔬果生產合作社',
-      script: [{ src: 'https://challenges.cloudflare.com/turnstile/v0/api.js', async: true, defer: true }]
-    }
-  },
-  data () {
-    return {
-      submitted: false,
-      sending: false,
-      captchaToken: '',
-      captchaError: false,
-      sendError: false,
-      form: { name: '', email: '', subject: '', message: '' }
-    }
-  },
-  mounted () {
-    this._renderTurnstile()
-  },
-  methods: {
-    _renderTurnstile () {
-      if (window.turnstile) {
-        window.turnstile.render('#turnstile-box', {
-          sitekey: TURNSTILE_SITEKEY,
-          callback: (token) => { this.captchaToken = token; this.captchaError = false },
-          'expired-callback': () => { this.captchaToken = '' }
-        })
-      } else {
-        setTimeout(() => this._renderTurnstile(), 400)
-      }
-    },
-    async handleSubmit () {
-      if (!this.captchaToken) { this.captchaError = true; return }
-      this.sending = true
-      this.sendError = false
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            subject: `[浤賀官網] ${this.form.subject}`,
-            from_name: this.form.name,
-            ...this.form,
-            'cf-turnstile-response': this.captchaToken
-          })
-        })
-        const data = await res.json()
-        if (data.success) {
-          this.submitted = true
-        } else {
-          this.sendError = true
-        }
-      } catch {
-        this.sendError = true
-      } finally {
-        this.sending = false
-      }
-    },
-    resetForm () {
-      this.submitted = false
-      this.captchaToken = ''
-      this.captchaError = false
-      this.sendError = false
-      this.form = { name: '', email: '', subject: '', message: '' }
-      this.$nextTick(() => this._renderTurnstile())
+      title: '聯絡我們 | HongHe – 浤賀有限公司 x 廉使蔬果生產合作社'
     }
   }
 }
@@ -401,15 +301,16 @@ export default {
   background: #fff;
 }
 .form-group textarea { resize: vertical; }
-.captcha-error, .send-error {
-  font-size: 13px;
-  color: #d32f2f;
-  margin: -8px 0 12px;
+.mailto-hint {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 24px;
+  line-height: 1.7;
 }
-.submit-btn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-  transform: none;
+.mailto-btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
 }
 .submit-btn {
   width: 100%;
