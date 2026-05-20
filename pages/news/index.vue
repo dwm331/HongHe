@@ -40,7 +40,7 @@ export default {
     return { title: '最新消息 | 浤賀有限公司 HongHe' }
   },
   data () {
-    return { news }
+    return { news: news.filter(n => n.isNews) }
   }
 }
 </script>
