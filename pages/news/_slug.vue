@@ -90,7 +90,7 @@ export default {
 .article-banner {
   position: relative;
   min-height: 320px;
-  padding-top: 70px;
+  padding-top: 120px;
   background-size: cover;
   background-position: center;
   display: flex;

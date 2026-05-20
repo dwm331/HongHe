@@ -52,7 +52,7 @@ export default {
 /* ── Split layout ───────────────────────────────────── */
 .about-split {
   display: flex;
-  padding-top: 70px; /* fixed header height */
+  padding-top: 120px; /* fixed header height */
   min-height: 100vh;
 }
 
@@ -60,8 +60,8 @@ export default {
 .split-image {
   width: 50%;
   position: sticky;
-  top: 70px;
-  height: calc(100vh - 70px);
+  top: 120px;
+  height: calc(100vh - 120px);
   flex-shrink: 0;
   background-size: cover;
   background-position: center;

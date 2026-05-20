@@ -65,7 +65,7 @@ export default {
 .products-banner {
   position: relative;
   height: 380px;
-  margin-top: 70px;
+  margin-top: 120px;
   background-size: cover;
   background-position: center;
   display: flex;

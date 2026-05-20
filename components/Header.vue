@@ -90,7 +90,7 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 32px;
-  height: 70px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -217,10 +217,10 @@ export default {
 
   .nav {
     position: fixed;
-    top: 70px;
+    top: 120px;
     right: -280px;
     width: 260px;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 120px);
     background: #fff;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.12);
     overflow-y: auto;

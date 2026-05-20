@@ -49,7 +49,7 @@ export default {
 /* ── Page Header ─────────────────────────────────────── */
 .news-header {
   position: relative;
-  padding-top: 70px;
+  padding-top: 120px;
   min-height: 320px;
   background-size: cover;
   background-position: center;
