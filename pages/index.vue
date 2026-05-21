@@ -520,16 +520,12 @@ export default {
   margin: 0 auto;
 }
 .konte-post-grid--elementor {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -40px;
-  margin-right: -40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
 }
 .konte-post-grid--elementor .hentry {
-  width: calc(100% / 3);
-  padding-left: 40px;
-  padding-right: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
 .post-thumbnail {
   display: block;
@@ -641,14 +637,14 @@ export default {
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .konte-post-grid--elementor .hentry { width: 50%; }
+  .konte-post-grid--elementor { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .cat-section { flex-direction: column; }
   .cat-col { padding: 0 20px; }
   .company-inner { grid-template-columns: 1fr; }
   .company-images { grid-template-columns: 1fr; }
-  .konte-post-grid--elementor .hentry { width: 100%; }
+  .konte-post-grid--elementor { grid-template-columns: 1fr; }
   .video-grid { grid-template-columns: 1fr; }
   .partner-inner { grid-template-columns: 1fr; }
   .partner-imgs { flex-wrap: wrap; }
