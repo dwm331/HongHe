@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a){return {staticAssetsBase:"\u002FHongHe\u002F_nuxt\u002Fstatic\u002F1779322091",layout:"default",error:a,serverRendered:true,routePath:"\u002Fnews\u002Fnapa-cabbage-vitamins",config:{_app:{basePath:"\u002FHongHe\u002F",assetsPath:"\u002FHongHe\u002F_nuxt\u002F",cdnURL:a}}}}(null));
